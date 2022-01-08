@@ -1,16 +1,12 @@
+import { useState } from "react";
 import { MotionCanvas } from "framer-motion/three";
 import { Preload, ScrollControls, Stats, useCursor } from "@react-three/drei";
+
 import Lights from "./Lights";
-import { useState } from "react";
-import One from "./Pages/One";
-import Two from "./Pages/Two";
 import Camera from "./Camera";
-import Three from "./Pages/Three";
-const HomeScene = ({ isPhone }) => {
+const TestScene = () => {
   const [lightTheme, setLightTheme] = useState(true);
-
   const [cursor, setCursor] = useState(false);
-
   useCursor(cursor, "pointer", "auto");
 
   return (
@@ -22,18 +18,11 @@ const HomeScene = ({ isPhone }) => {
     >
       <Stats />
       <Preload all />
-      <ScrollControls pages={4} damping={4} distance={2}>
-        <Camera isPhone={isPhone} />
-        <One
-          lightTheme={lightTheme}
-          setLightTheme={setLightTheme}
-          setCursor={setCursor}
-        />
-        <Two lightTheme={lightTheme} />
-        <Three lightTheme={lightTheme} isPhone={isPhone} />
+      <ScrollControls pages={1} damping={1} distance={2}>
+        <Camera />
       </ScrollControls>
       <Lights />
     </MotionCanvas>
   );
 };
-export default HomeScene;
+export default TestScene;

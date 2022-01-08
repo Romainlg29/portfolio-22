@@ -1,4 +1,14 @@
-import { MeshLambertMaterial, MeshStandardMaterial } from "three";
+import { MeshDistortMaterial } from "@react-three/drei";
+import {
+  MeshBasicMaterial,
+  MeshLambertMaterial,
+  MeshStandardMaterial,
+} from "three";
+
+export const TransparentMaterial = new MeshBasicMaterial({
+  opacity: 0,
+  transparent: true,
+});
 
 // NO ROUGHNESS
 export const LambertMaterialLightBlue = new MeshLambertMaterial({
@@ -35,29 +45,27 @@ export const RoughMaterialDarkBlue = new MeshStandardMaterial({
   metalness: 0.1,
 });
 
-// METALNESS
-export const MetalMaterialLightBlue = new MeshStandardMaterial({
-  color: "lightblue",
-  roughness: 0,
-  metalness: 0.9,
-});
-export const MetalMaterialRoyalBlue = new MeshStandardMaterial({
+export const DarkRoyalBlueMaterial = new MeshStandardMaterial({
   color: "royalblue",
   roughness: 0,
-  metalness: 0.9,
+  metalness: 0.95,
 });
-export const MetalMaterialSteelBlue = new MeshStandardMaterial({
-  color: "steelblue",
+
+/*export const LightRoyalBlueMaterial = new MeshStandardMaterial({
+  color: "royalblue",
   roughness: 0,
-  metalness: 0.9,
-});
-export const MetalMaterialMidnightBlue = new MeshStandardMaterial({
-  color: "midnightblue",
-  roughness: 0,
-  metalness: 0.9,
-});
-export const MetalMaterialDarkBlue = new MeshStandardMaterial({
-  color: "darkblue",
-  roughness: 0,
-  metalness: 0.9,
-});
+  metalness: 0.05,
+});*/
+
+// Mandatory to get the wanted color
+export const LightRoyalBlueMaterial = () => {
+  return (
+    <MeshDistortMaterial
+      color={"royalblue"}
+      speed={0}
+      distort={0}
+      roughness={0}
+      metalness={0.05}
+    />
+  );
+};

@@ -6,7 +6,7 @@ const DistortingSphere = ({
   color = "royalblue",
   speed = 1,
   distort = 0.3,
-  roughness = 1,
+  roughness = 0,
   metalness = 0,
 }) => {
   return (
