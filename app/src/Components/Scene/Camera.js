@@ -23,7 +23,7 @@ const Camera = ({ isPhone }) => {
     third: {
       x: 0,
       y: -10,
-      z: 5,
+      z: isPhone ? 8 : 5,
       rotateX: 0,
       rotateY: 0,
       rotateZ: 0,
@@ -37,10 +37,10 @@ const Camera = ({ isPhone }) => {
     if (scroll.offset < 0.08 && moveTo !== "first") {
       return setMoveTo("first");
     }
-    if (scroll.offset >= 0.08 && scroll.offset < 0.28 && moveTo !== "second") {
+    if (scroll.offset >= 0.08 && scroll.offset < 0.24 && moveTo !== "second") {
       return setMoveTo("second");
     }
-    if (scroll.offset >= 0.28 && moveTo !== "third") {
+    if (scroll.offset >= 0.24 && moveTo !== "third") {
       return setMoveTo("third");
     }
   });

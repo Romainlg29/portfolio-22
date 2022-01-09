@@ -17,26 +17,5 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f4f8;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 16px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
-}
-
-@media screen and (max-width: 640px) {
-  ::-webkit-scrollbar {
-    display: none;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  display: none;
 }

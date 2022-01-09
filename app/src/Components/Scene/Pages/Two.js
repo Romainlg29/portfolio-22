@@ -1,5 +1,4 @@
 import {
-  MeshDistortMaterial,
   RoundedBox,
   Scroll,
   Sphere,
@@ -83,7 +82,7 @@ const Two = ({ lightTheme }) => {
             repeatDelay: 4,
           }}
         >
-          <Sphere scale={1} material={RoughMaterialRoyalBlue} />
+          <Sphere scale={1} material={RoughMaterialRoyalBlue}/>
         </motion.mesh>
       </group>
 

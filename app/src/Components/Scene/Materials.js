@@ -1,7 +1,7 @@
 import { MeshDistortMaterial } from "@react-three/drei";
 import {
   MeshBasicMaterial,
-  MeshLambertMaterial,
+  MeshPhysicalMaterial,
   MeshStandardMaterial,
 } from "three";
 
@@ -10,37 +10,8 @@ export const TransparentMaterial = new MeshBasicMaterial({
   transparent: true,
 });
 
-// NO ROUGHNESS
-export const LambertMaterialLightBlue = new MeshLambertMaterial({
-  color: "lightblue",
-});
-export const LambertMaterialRoyalBlue = new MeshLambertMaterial({
-  color: "royalblue",
-});
-
-// ROUGHNESS
-export const RoughMaterialLightBlue = new MeshStandardMaterial({
-  color: "lightblue",
-  roughness: 0,
-  metalness: 0.1,
-});
 export const RoughMaterialRoyalBlue = new MeshStandardMaterial({
   color: "royalblue",
-  roughness: 0,
-  metalness: 0.1,
-});
-export const RoughMaterialSteelBlue = new MeshStandardMaterial({
-  color: "steelblue",
-  roughness: 0,
-  metalness: 0.1,
-});
-export const RoughMaterialMidnightBlue = new MeshStandardMaterial({
-  color: "midnightblue",
-  roughness: 0,
-  metalness: 0.1,
-});
-export const RoughMaterialDarkBlue = new MeshStandardMaterial({
-  color: "darkblue",
   roughness: 0,
   metalness: 0.1,
 });
@@ -51,12 +22,6 @@ export const DarkRoyalBlueMaterial = new MeshStandardMaterial({
   metalness: 0.95,
 });
 
-/*export const LightRoyalBlueMaterial = new MeshStandardMaterial({
-  color: "royalblue",
-  roughness: 0,
-  metalness: 0.05,
-});*/
-
 // Mandatory to get the wanted color
 export const LightRoyalBlueMaterial = () => {
   return (
@@ -66,6 +31,30 @@ export const LightRoyalBlueMaterial = () => {
       distort={0}
       roughness={0}
       metalness={0.05}
+    />
+  );
+};
+
+export const GlassMaterial = new MeshPhysicalMaterial({
+  transparent: true,
+  opacity: 0.25,
+  color: "#bababa",
+  roughness: 0,
+  metalness: 0.5,
+  reflectivity: 1,
+});
+
+export const GlassAlternateMaterial = () => {
+  return (
+    <meshPhysicalMaterial
+      thickness={0.05}
+      roughness={0}
+      clearcoat={1}
+      clearcoatRoughness={1}
+      transmission={.99}
+      ior={2}
+      envMapIntensity={50}
+      color={"#bababa"}
     />
   );
 };

@@ -5,10 +5,10 @@ const ImageMesh = ({
   position = [0, 0, 0],
   rotation = [0, 0, 0],
   scale = 1,
-  initialScale = false,
+  pointerIn = () => {},
+  pointerOut = () => {},
 }) => {
   const t = useTexture(texture);
-
 
   return (
     <mesh
@@ -16,16 +16,19 @@ const ImageMesh = ({
       rotation={rotation}
       scale={scale}
       receiveShadow
+      onPointerOver={pointerIn}
+      onPointerOut={pointerOut}
     >
       <planeBufferGeometry
         attach="geometry"
-        args={
-          initialScale
-            ? initialScale
-            : [t.image.naturalWidth / 1000, t.image.naturalHeight / 1000]
-        }
+        args={[t.image.naturalWidth / 500, t.image.naturalHeight / 500]}
       />
-      <meshBasicMaterial attach="material" map={t} />
+      <meshBasicMaterial
+        attach="material"
+        map={t}
+        toneMapped={false}
+        transparent
+      />
     </mesh>
   );
 };

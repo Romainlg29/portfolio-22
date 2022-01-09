@@ -1,10 +1,11 @@
 import { MotionCanvas } from "framer-motion/three";
-import { Preload, ScrollControls, Stats, useCursor } from "@react-three/drei";
+import { Preload, ScrollControls, useCursor } from "@react-three/drei";
 import Lights from "./Lights";
 import { useState } from "react";
 import One from "./Pages/One";
 import Two from "./Pages/Two";
 import Camera from "./Camera";
+import Four from "./Pages/Four";
 import Three from "./Pages/Three";
 const HomeScene = ({ isPhone }) => {
   const [lightTheme, setLightTheme] = useState(true);
@@ -15,12 +16,12 @@ const HomeScene = ({ isPhone }) => {
 
   return (
     <MotionCanvas
+      colorManagement
       dpr={[1, 2]}
       style={{
         backgroundColor: lightTheme ? "#F1F4F8" : "#0E0B07",
       }}
     >
-      <Stats />
       <Preload all />
       <ScrollControls pages={4} damping={4} distance={2}>
         <Camera isPhone={isPhone} />
@@ -30,7 +31,12 @@ const HomeScene = ({ isPhone }) => {
           setCursor={setCursor}
         />
         <Two lightTheme={lightTheme} />
-        <Three lightTheme={lightTheme} isPhone={isPhone} />
+        <Three
+          lightTheme={lightTheme}
+          isPhone={isPhone}
+          setCursor={setCursor}
+        />
+        <Four lightTheme={lightTheme} isPhone={isPhone} setCursor={setCursor} />
       </ScrollControls>
       <Lights />
     </MotionCanvas>

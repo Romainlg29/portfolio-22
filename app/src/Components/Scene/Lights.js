@@ -33,7 +33,6 @@ const Lights = () => {
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
       />
-      <pointLight position={[0, -15, 10]} intensity={.1}/>
     </group>
   );
 };
