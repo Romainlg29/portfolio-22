@@ -66,6 +66,7 @@ const Four = ({ theme, setCursor }) => {
           transition={{ type: "spring", bounce: 0.3, duration: 1 }}
           onPointerOver={() => setCursor(true)}
           onPointerOut={() => setCursor(false)}
+          onClick={() => window.appHistory.push("/posts")}
         >
           <Text
             scale={1}

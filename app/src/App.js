@@ -4,6 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import { useLocation, Switch, Route } from "react-router-dom";
 
 const Home = lazy(() => import("./Components/Routes/Home"));
+const Posts = lazy(() => import("./Components/Routes/Posts"));
 
 const App = () => {
   const location = useLocation();
@@ -17,6 +18,9 @@ const App = () => {
           <Switch location={location} key={location.pathname}>
             <Route path={["/"]} exact>
               <Home isPhone={isPhone} />
+            </Route>
+            <Route path={["/posts"]} exact>
+              <Posts isPhone={isPhone} />
             </Route>
           </Switch>
         </AnimatePresence>
