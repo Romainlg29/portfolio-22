@@ -1,22 +1,25 @@
+import { AnimatePresence } from "framer-motion";
 import { Suspense, lazy } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Routes, Route } from "react-router-dom";
+import { useLocation, Switch, Route } from "react-router-dom";
 
 const Home = lazy(() => import("./Components/Routes/Home"));
-const Post = lazy(() => import("./Components/Routes/Post"));
 
 const App = () => {
+  const location = useLocation();
+
   const isPhone = useMediaQuery({ query: "(max-width: 640px)" });
 
   return (
     <div>
       <Suspense fallback={null}>
-        <Routes>
-          <Route path={"/"}>
-            <Route index element={<Home isPhone={isPhone} />} />
-            <Route path={"post"} element={<Post isPhone={isPhone} />} />
-          </Route>
-        </Routes>
+        <AnimatePresence exitBeforeEnter>
+          <Switch location={location} key={location.pathname}>
+            <Route path={["/"]} exact>
+              <Home isPhone={isPhone} />
+            </Route>
+          </Switch>
+        </AnimatePresence>
       </Suspense>
     </div>
   );

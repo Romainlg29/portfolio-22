@@ -1,11 +1,8 @@
 import { Scroll, Text } from "@react-three/drei";
 import GlassPanel from "../Images/GlassPanel";
 import { motion } from "framer-motion/three";
-import { useNavigate } from "react-router-dom";
 
-const Three = ({ theme, setCursor }) => {
-  const navigate = useNavigate();
-
+const Projects = ({ theme, setCursor }) => {
   return (
     <Scroll>
       <group position={[0, -17, 0]}>
@@ -21,10 +18,6 @@ const Three = ({ theme, setCursor }) => {
         <motion.mesh
           whileHover={{ scale: 1.01 }}
           transition={{ type: "spring", bounce: 0.3, duration: 1 }}
-          onClick={() => {
-            console.log("clicked");
-            navigate('/test', {replace: true})
-          }}
         >
           <GlassPanel
             texture={`${
@@ -46,4 +39,4 @@ const Three = ({ theme, setCursor }) => {
     </Scroll>
   );
 };
-export default Three;
+export default Projects;

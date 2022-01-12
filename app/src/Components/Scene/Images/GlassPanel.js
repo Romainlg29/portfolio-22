@@ -8,6 +8,7 @@ const GlassPanel = ({
   texture,
   imageScale = 1,
   position = [0, 0, 0],
+  onClick = () => {},
 }) => {
   return (
     <motion.mesh
@@ -16,6 +17,7 @@ const GlassPanel = ({
       transition={{ type: "spring", bounce: 0.3, duration: 1 }}
       onPointerOver={() => setCursor(true)}
       onPointerOut={() => setCursor(false)}
+      onClick={onClick}
     >
       <ImageMesh texture={texture} scale={imageScale} position={[0, 0, 0.1]} />
       <RoundedBox scale={[3, 2, 0.1]} material={GlassMaterial} />

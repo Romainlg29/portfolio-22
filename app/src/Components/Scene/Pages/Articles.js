@@ -19,21 +19,21 @@ const Four = ({ theme, setCursor }) => {
         <GlassPanel
           texture={`${
             process.env.PUBLIC_URL
-          }/Assets/Blog/Monitoring-Docker/header${
-            theme ? "" : "_dark"
-          }.png`}
+          }/Assets/Blog/Monitoring-Docker/header${theme ? "" : "_dark"}.png`}
           imageScale={0.7}
           setCursor={setCursor}
+          onClick={() =>
+            window.appHistory.push("/posts/monitor-with-prometheus-and-grafana")
+          }
         />
         <GlassPanel
           position={[0, -2.5, 0]}
           texture={`${
             process.env.PUBLIC_URL
-          }/Assets/Blog/Dockerize-Wordpress/header${
-            theme ? "" : "_dark"
-          }.png`}
+          }/Assets/Blog/Dockerize-Wordpress/header${theme ? "" : "_dark"}.png`}
           imageScale={0.7}
           setCursor={setCursor}
+          onClick={() => window.appHistory.push("/posts/dockerize-wordpress")}
         />
 
         <Torus

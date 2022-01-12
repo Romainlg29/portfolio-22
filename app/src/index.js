@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-import { BrowserRouter } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 
 import { HelmetProvider } from "react-helmet-async";
 import { createBrowserHistory } from "history";
@@ -15,9 +15,14 @@ const browserHistory = createBrowserHistory({
 ReactDOM.render(
   <React.StrictMode>
     <HelmetProvider>
-      <BrowserRouter history={browserHistory}>
-        <App />
-      </BrowserRouter>
+      <Router history={browserHistory}>
+        <Route
+          component={({ history }) => {
+            window.appHistory = history;
+            return <App />;
+          }}
+        />
+      </Router>
     </HelmetProvider>
   </React.StrictMode>,
   document.getElementById("root")

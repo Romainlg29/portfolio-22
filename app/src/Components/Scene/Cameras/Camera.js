@@ -2,6 +2,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { LayoutCamera } from "framer-motion/three";
 import { useState } from "react";
+
 const Camera = ({ isPhone }) => {
   const variants = {
     first: {
