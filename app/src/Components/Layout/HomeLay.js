@@ -1,7 +1,7 @@
 import HomeScene from "../Scene/HomeScene";
 import { motion } from "framer-motion";
 
-const HomeLay = ({isPhone}) => {
+const HomeLay = ({ isPhone }) => {
   return (
     <motion.div
       layout
@@ -10,7 +10,7 @@ const HomeLay = ({isPhone}) => {
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", bounce: 0.8, duration: 4, velocity: 2 }}
     >
-      <HomeScene isPhone={isPhone}/>
+      <HomeScene isPhone={isPhone} />
     </motion.div>
   );
 };

@@ -12,7 +12,7 @@ import {
   RoughMaterialRoyalBlue,
 } from "../Materials";
 
-const Two = ({ lightTheme }) => {
+const Two = ({ theme }) => {
   return (
     <Scroll>
       <motion.mesh
@@ -24,7 +24,7 @@ const Two = ({ lightTheme }) => {
       >
         <Text
           scale={2}
-          color={lightTheme ? "black" : "white"}
+          color={theme ? "black" : "white"}
           font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
         >
           I'm looking for an engineering school
@@ -39,7 +39,7 @@ const Two = ({ lightTheme }) => {
       >
         <Text
           scale={1.5}
-          color={lightTheme ? "royalblue" : "white"}
+          color={theme ? "royalblue" : "white"}
           font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
         >
           Starting in September 2022
@@ -202,9 +202,9 @@ const Two = ({ lightTheme }) => {
         >
           <Torus
             args={[2, 1, 48, 64]}
-            material={lightTheme && DarkRoyalBlueMaterial}
+            material={theme && DarkRoyalBlueMaterial}
           >
-            {!lightTheme && <LightRoyalBlueMaterial />}
+            {!theme && <LightRoyalBlueMaterial />}
           </Torus>
         </motion.mesh>
         <motion.mesh
@@ -220,9 +220,9 @@ const Two = ({ lightTheme }) => {
         >
           <Torus
             args={[2, 1, 48, 64]}
-            material={lightTheme && DarkRoyalBlueMaterial}
+            material={theme && DarkRoyalBlueMaterial}
           >
-            {!lightTheme && <LightRoyalBlueMaterial />}
+            {!theme && <LightRoyalBlueMaterial />}
           </Torus>
         </motion.mesh>
       </group>

@@ -2,15 +2,16 @@ import { MotionCanvas } from "framer-motion/three";
 import { Preload, ScrollControls, useCursor } from "@react-three/drei";
 import Lights from "./Lights";
 import { useState } from "react";
-import One from "./Pages/One";
-import Two from "./Pages/Two";
-import Camera from "./Camera";
-import Four from "./Pages/Four";
-import Three from "./Pages/Three";
-const HomeScene = ({ isPhone }) => {
-  const [lightTheme, setLightTheme] = useState(true);
+import Begin from "./Pages/Begin";
+import Action from "./Pages/Action";
+import Camera from "./Cameras/Camera";
+import Articles from "./Pages/Articles";
+import Projects from "./Pages/Projects";
+import { BrowserRouter } from "react-router-dom";
 
+const HomeScene = ({ isPhone }) => {
   const [cursor, setCursor] = useState(false);
+  const [theme, setTheme] = useState(true);
 
   useCursor(cursor, "pointer", "auto");
 
@@ -19,26 +20,24 @@ const HomeScene = ({ isPhone }) => {
       colorManagement
       dpr={[1, 2]}
       style={{
-        backgroundColor: lightTheme ? "#F1F4F8" : "#0E0B07",
+        backgroundColor: theme ? "#F1F4F8" : "#0E0B07",
       }}
     >
-      <Preload all />
-      <ScrollControls pages={4} damping={4} distance={2}>
-        <Camera isPhone={isPhone} />
-        <One
-          lightTheme={lightTheme}
-          setLightTheme={setLightTheme}
-          setCursor={setCursor}
-        />
-        <Two lightTheme={lightTheme} />
-        <Three
-          lightTheme={lightTheme}
-          isPhone={isPhone}
-          setCursor={setCursor}
-        />
-        <Four lightTheme={lightTheme} isPhone={isPhone} setCursor={setCursor} />
-      </ScrollControls>
-      <Lights />
+      <BrowserRouter>
+        <Preload all />
+        <ScrollControls pages={4} damping={4} distance={2}>
+          <Camera isPhone={isPhone} />
+          <Begin
+            theme={theme}
+            setTheme={() => setTheme(!theme)}
+            setCursor={setCursor}
+          />
+          <Action theme={theme} />
+          <Projects theme={theme} isPhone={isPhone} setCursor={setCursor} />
+          <Articles theme={theme} isPhone={isPhone} setCursor={setCursor} />
+        </ScrollControls>
+        <Lights />
+      </BrowserRouter>
     </MotionCanvas>
   );
 };

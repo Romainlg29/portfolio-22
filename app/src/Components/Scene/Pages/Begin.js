@@ -6,7 +6,7 @@ import { RoughMaterialRoyalBlue } from "../Materials";
 import DistortingSphere from "../Spheres/DistortingSphere";
 import RotatingTetrahedron from "../Tetrahedron/RotatingTetrahedron";
 
-const One = ({ lightTheme, setLightTheme, setCursor }) => {
+const One = ({ theme, setTheme, setCursor }) => {
   const tapVariants = {
     default: { x: 2.2, y: 1 },
     moving: { x: 1, y: 2 },
@@ -24,7 +24,7 @@ const One = ({ lightTheme, setLightTheme, setCursor }) => {
         >
           <DistortingSphere
             roughness={0}
-            metalness={lightTheme ? 0.95 : 0.05}
+            metalness={theme ? 0.95 : 0.05}
           />
         </motion.mesh>
         <motion.mesh
@@ -41,12 +41,12 @@ const One = ({ lightTheme, setLightTheme, setCursor }) => {
         >
           <DistortingSphere
             roughness={0}
-            metalness={lightTheme ? 0.95 : 0.05}
+            metalness={theme ? 0.95 : 0.05}
           />
         </motion.mesh>
         <motion.mesh
           position={[-0.7, -2, -2]}
-          onTap={() => setLightTheme(!lightTheme)}
+          onTap={() => setTheme(!theme)}
           whileTap={{ scale: 0 }}
           whileHover={{ rotateX: Math.PI }}
           transition={{ type: "spring", bounce: 0.5, duration: 0.5 }}
@@ -55,7 +55,7 @@ const One = ({ lightTheme, setLightTheme, setCursor }) => {
         >
           <DistortingSphere
             roughness={0}
-            metalness={lightTheme ? 0.95 : 0.05}
+            metalness={theme ? 0.95 : 0.05}
           />
         </motion.mesh>
 
@@ -94,7 +94,7 @@ const One = ({ lightTheme, setLightTheme, setCursor }) => {
         >
           <Text
             scale={3}
-            color={lightTheme ? "black" : "white"}
+            color={theme ? "black" : "white"}
             font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
           >
             I'm Romain
@@ -108,7 +108,7 @@ const One = ({ lightTheme, setLightTheme, setCursor }) => {
         >
           <Text
             scale={1.5}
-            color={lightTheme ? "black" : "white"}
+            color={theme ? "black" : "white"}
             font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
           >
             Student in software development

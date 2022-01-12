@@ -4,14 +4,14 @@ import GlassPanel from "../Images/GlassPanel";
 import RotatingCube from "../Cubes/RotatingCube";
 import { motion } from "framer-motion/three";
 
-const Four = ({ lightTheme, setCursor }) => {
+const Four = ({ theme, setCursor }) => {
   return (
     <Scroll>
       <group position={[0, -22, 0]}>
         <Text
           position={[0, 1.5, 1]}
           scale={2}
-          color={lightTheme ? "black" : "white"}
+          color={theme ? "black" : "white"}
           font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
         >
           And explore my latests posts!
@@ -20,7 +20,7 @@ const Four = ({ lightTheme, setCursor }) => {
           texture={`${
             process.env.PUBLIC_URL
           }/Assets/Blog/Monitoring-Docker/header${
-            lightTheme ? "" : "_dark"
+            theme ? "" : "_dark"
           }.png`}
           imageScale={0.7}
           setCursor={setCursor}
@@ -30,7 +30,7 @@ const Four = ({ lightTheme, setCursor }) => {
           texture={`${
             process.env.PUBLIC_URL
           }/Assets/Blog/Dockerize-Wordpress/header${
-            lightTheme ? "" : "_dark"
+            theme ? "" : "_dark"
           }.png`}
           imageScale={0.7}
           setCursor={setCursor}
@@ -69,7 +69,7 @@ const Four = ({ lightTheme, setCursor }) => {
         >
           <Text
             scale={1}
-            color={lightTheme ? "black" : "white"}
+            color={theme ? "black" : "white"}
             font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
           >
             Show more
