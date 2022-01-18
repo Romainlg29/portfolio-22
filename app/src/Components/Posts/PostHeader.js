@@ -16,7 +16,7 @@ const PostHeader = ({ title, date }) => {
         <p>Go back</p>
       </motion.div>
       <div className="flex flex-col items-center justify-center">
-        <p className="text-lg font-semibold mt-8 underline underline-offset-2 decoration-blue-200 decoration-2">
+        <p className="text-lg text-center font-semibold mt-8 underline underline-offset-2 decoration-blue-200 decoration-2">
           {title}
         </p>
         <p className="text-sm text-gray-800 mt-2 underline underline-offset-2 decoration-blue-100 decoration-2">
