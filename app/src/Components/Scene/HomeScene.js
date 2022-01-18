@@ -7,6 +7,7 @@ import Action from "./Pages/Action";
 import Camera from "./Cameras/Camera";
 import Articles from "./Pages/Articles";
 import Projects from "./Pages/Projects";
+import Medias from "./Pages/Medias";
 
 const HomeScene = ({ isPhone }) => {
   const [cursor, setCursor] = useState(false);
@@ -30,9 +31,10 @@ const HomeScene = ({ isPhone }) => {
           setTheme={() => setTheme(!theme)}
           setCursor={setCursor}
         />
-        <Action theme={theme} isPhone={isPhone}/>
+        <Action theme={theme} isPhone={isPhone} />
         <Projects theme={theme} isPhone={isPhone} setCursor={setCursor} />
         <Articles theme={theme} isPhone={isPhone} setCursor={setCursor} />
+        <Medias theme={theme} isPhone={isPhone} setCursor={setCursor} />
       </ScrollControls>
       <Lights />
     </MotionCanvas>

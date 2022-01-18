@@ -7,6 +7,7 @@ const ImageMesh = ({
   scale = 1,
   pointerIn = () => {},
   pointerOut = () => {},
+  click = () => {},
 }) => {
   const t = useTexture(texture);
 
@@ -18,6 +19,7 @@ const ImageMesh = ({
       receiveShadow
       onPointerOver={pointerIn}
       onPointerOut={pointerOut}
+      onClick={click}
     >
       <planeBufferGeometry
         attach="geometry"
