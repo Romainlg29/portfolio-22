@@ -4,13 +4,13 @@ import GlassPanel from "../Images/GlassPanel";
 import RotatingCube from "../Cubes/RotatingCube";
 import { motion } from "framer-motion/three";
 
-const Four = ({ theme, setCursor }) => {
+const Four = ({ isPhone, theme, setCursor }) => {
   return (
     <Scroll>
       <group position={[0, -22, 0]}>
         <Text
           position={[0, 1.5, 1]}
-          scale={2}
+          scale={isPhone ? 1.8 : 2}
           color={theme ? "black" : "white"}
           font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
         >

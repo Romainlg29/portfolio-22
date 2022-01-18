@@ -23,14 +23,14 @@ const HomeScene = ({ isPhone }) => {
       }}
     >
       <Preload all />
-      <ScrollControls pages={4} damping={4} distance={2}>
+      <ScrollControls pages={isPhone ? 2.75 : 2.85} damping={4} distance={2}>
         <Camera isPhone={isPhone} />
         <Begin
           theme={theme}
           setTheme={() => setTheme(!theme)}
           setCursor={setCursor}
         />
-        <Action theme={theme} />
+        <Action theme={theme} isPhone={isPhone}/>
         <Projects theme={theme} isPhone={isPhone} setCursor={setCursor} />
         <Articles theme={theme} isPhone={isPhone} setCursor={setCursor} />
       </ScrollControls>

@@ -15,7 +15,7 @@ const Camera = ({ isPhone }) => {
     },
     second: {
       x: isPhone ? 1 : 5,
-      y: -6,
+      y: -7,
       z: 5,
       rotateX: 0,
       rotateY: -Math.PI / 2,
@@ -23,7 +23,7 @@ const Camera = ({ isPhone }) => {
     },
     third: {
       x: 0,
-      y: -10,
+      y: -11,
       z: isPhone ? 8 : 5,
       rotateX: 0,
       rotateY: 0,

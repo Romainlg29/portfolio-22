@@ -1,10 +1,4 @@
-import {
-  RoundedBox,
-  Scroll,
-  Sphere,
-  Text,
-  Torus,
-} from "@react-three/drei";
+import { RoundedBox, Scroll, Sphere, Text, Torus } from "@react-three/drei";
 import { motion } from "framer-motion/three";
 import {
   DarkRoyalBlueMaterial,
@@ -12,39 +6,62 @@ import {
   RoughMaterialRoyalBlue,
 } from "../Materials";
 
-const Two = ({ theme }) => {
+const Two = ({ theme, isPhone }) => {
   return (
     <Scroll>
-      <motion.mesh
-        position={[10, -10, 5]}
-        rotation={[0, -Math.PI / 2, 0]}
-        initial={{ scale: 0, y: -11 }}
-        animate={{ scale: 1, y: -10 }}
-        transition={{ type: "spring", bounce: 0.3, duration: 1, delay: 0.7 }}
-      >
-        <Text
-          scale={2}
-          color={theme ? "black" : "white"}
-          font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
-        >
-          I'm looking for an engineering school
-        </Text>
-      </motion.mesh>
-      <motion.mesh
-        position={[10, -10.3, 5]}
-        rotation={[0, -Math.PI / 2, 0]}
-        initial={{ scale: 0, y: -11.5 }}
-        animate={{ scale: 1, y: -10.3 }}
-        transition={{ type: "spring", bounce: 0.3, duration: 1, delay: 0.7 }}
-      >
-        <Text
-          scale={1.5}
-          color={theme ? "royalblue" : "white"}
-          font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
-        >
-          Starting in September 2022
-        </Text>
-      </motion.mesh>
+      {isPhone ? (
+        <group>
+          <Text
+            position={[10, -10, 5]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={2.2}
+            color={theme ? "black" : "white"}
+            font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
+          >
+            I'm looking for
+          </Text>
+          <Text
+            position={[10, -10.3, 5]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={2.2}
+            color={theme ? "black" : "white"}
+            font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
+          >
+            an engineering school
+          </Text>
+          <Text
+            position={[10, -10.6, 5]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={1.7}
+            color={theme ? "royalblue" : "white"}
+            font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
+          >
+            Starting in September 2022
+          </Text>
+        </group>
+      ) : (
+        <group>
+          <Text
+            position={[10, -10, 5]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={2}
+            color={theme ? "black" : "white"}
+            font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
+          >
+            I'm looking for an engineering school
+          </Text>
+          <Text
+            position={[10, -10.3, 5]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={1.5}
+            color={theme ? "royalblue" : "white"}
+            font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
+          >
+            Starting in September 2022
+          </Text>
+        </group>
+      )}
+
       <group position={[10, -10, 5]}>
         <motion.mesh
           position={[2, 0.8, -5]}
@@ -82,7 +99,7 @@ const Two = ({ theme }) => {
             repeatDelay: 4,
           }}
         >
-          <Sphere scale={1} material={RoughMaterialRoyalBlue}/>
+          <Sphere scale={1} material={RoughMaterialRoyalBlue} />
         </motion.mesh>
       </group>
 
@@ -194,6 +211,7 @@ const Two = ({ theme }) => {
           scale={0.2}
           rotation={[0, Math.PI / 4, 0]}
           whileHover={{ rotateY: Math.PI * 2, scale: [0.2, 0.15, 0.2] }}
+          whileTap={{ rotateY: Math.PI * 3 }}
           transition={{
             type: "spring",
             bounce: 0.3,
@@ -211,6 +229,7 @@ const Two = ({ theme }) => {
           position={[1, -2, -1]}
           scale={0.2}
           rotation={[0, -Math.PI / 4, Math.PI / 2]}
+          whileTap={{ rotateX: Math.PI * 3 }}
           whileHover={{ rotateX: Math.PI * 2, scale: [0.2, 0.15, 0.2] }}
           transition={{
             type: "spring",

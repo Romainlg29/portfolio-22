@@ -1,5 +1,9 @@
 import { MotionCanvas } from "framer-motion/three";
-import { Preload, ScrollControls, useCursor } from "@react-three/drei";
+import {
+  Preload,
+  ScrollControls,
+  useCursor,
+} from "@react-three/drei";
 import Lights from "./Lights";
 import { useState } from "react";
 import PostsPresenter from "./Posts/PostsPresenter";

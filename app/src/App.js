@@ -2,6 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { Suspense, lazy } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useLocation, Switch, Route } from "react-router-dom";
+import SuspenseScreen from "./Components/Utils/SuspenseScreen";
 
 const Home = lazy(() => import("./Components/Routes/Home"));
 const Posts = lazy(() => import("./Components/Routes/Posts"));
@@ -13,18 +14,21 @@ const App = () => {
 
   return (
     <div>
-      <Suspense fallback={null}>
-        <AnimatePresence exitBeforeEnter>
+      <AnimatePresence exitBeforeEnter>
+        <Suspense fallback={<SuspenseScreen />}>
           <Switch location={location} key={location.pathname}>
             <Route path={["/"]} exact>
               <Home isPhone={isPhone} />
             </Route>
-            <Route path={["/posts"]} exact>
+            <Route path={["/posts"]}>
               <Posts isPhone={isPhone} />
             </Route>
+            <Route>
+              <Home isPhone={isPhone} />
+            </Route>
           </Switch>
-        </AnimatePresence>
-      </Suspense>
+        </Suspense>
+      </AnimatePresence>
     </div>
   );
 };
