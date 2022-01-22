@@ -9,6 +9,7 @@ const Posts = lazy(() => import("./Components/Routes/Posts"));
 
 const lang = navigator.language || navigator.userLanguage;
 const track = navigator.doNotTrack;
+const uad = navigator.userAgentData;
 
 const App = () => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const App = () => {
         },
         body: JSON.stringify({
           lang: lang,
+          mobile: uad.mobile,
         }),
       });
     };
