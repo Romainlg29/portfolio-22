@@ -1,5 +1,5 @@
 # Imports
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import Flask, request, redirect
 from flask_cors import CORS
 import hashlib
@@ -27,8 +27,8 @@ def status():
         return redirect("https://romain-legall.fr")
 
 
-@app.route("/analytics", methods=['POST', 'GET'])
-def analytics():
+@app.route("/analytics/overall", methods=['POST', 'GET'])
+def overall_analytics():
     if request.method == 'POST':
         req = request.get_json()
         hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
@@ -66,3 +66,38 @@ def analytics():
         return ''
     else:
         return
+
+
+@app.route("/analytics/post", methods=['POST', 'GET'])
+def posts_analytics():
+
+    req = request.get_json()
+    hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
+
+    db.execute(
+        "SELECT period FROM posts_logs WHERE user=? AND post=? ORDER BY id DESC LIMIT 1", (hash, req['post']))
+
+    if db.rowcount == -1 or db.rowcount == 0:
+
+        db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
+                   (hash, req['post'], datetime.now()))
+
+        conn.commit()
+
+        return ''
+
+    else:
+
+        period = datetime.now()
+
+        for d in db:
+            period = d[0]
+
+        if (period + timedelta(minutes=10)) < datetime.now():
+
+            db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
+                   (hash, req['post'], datetime.now()))
+
+            conn.commit()
+
+        return ''

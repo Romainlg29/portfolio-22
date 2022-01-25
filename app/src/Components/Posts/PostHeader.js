@@ -1,5 +1,23 @@
 import { motion } from "framer-motion";
-const PostHeader = ({ title, date }) => {
+import { useEffect } from "react";
+
+const PostHeader = ({ title, date, id }) => {
+  useEffect(() => {
+    const sendAnalytics = async () => {
+      fetch("http://localhost:5000/analytics/post", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          post: id,
+        }),
+      });
+    };
+    sendAnalytics();
+  });
+
   return (
     <div className="w-screen flex flex-col justify-center items-center p-2">
       <motion.div

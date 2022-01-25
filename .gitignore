@@ -1,3 +1,4 @@
 **/node_modules
 **/.env
 app/build
+.vscode/

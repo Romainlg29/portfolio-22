@@ -18,7 +18,7 @@ const Posts = ({ isPhone }) => {
             return (
               <Route path={`/posts${p.url}`} key={`posts${p.url}`} exact>
                 <Suspense fallback={<SuspenseScreen />}>
-                  <Component title={p.title} date={p.date} />
+                  <Component title={p.title} date={p.date} id={p.id}/>
                 </Suspense>
               </Route>
             );

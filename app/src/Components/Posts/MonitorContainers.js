@@ -7,7 +7,7 @@ import ParagraphImp from "./Presenter/ParagraphImp";
 import InformationToast from "./Presenter/InformationToast";
 import { useState } from "react";
 
-const MonitorContainers = ({ title, date }) => {
+const MonitorContainers = ({ title, date, id }) => {
   const [infoText, setInfoText] = useState("");
 
   return (
@@ -23,7 +23,7 @@ const MonitorContainers = ({ title, date }) => {
           <InformationToast text={infoText} setText={setInfoText} />
         ) : null}
       </AnimatePresence>
-      <PostHeader title={title} date={date} />
+      <PostHeader title={title} date={date} id={id}/>
       <div className="w-11/12 lg:w-3/5 mt-2 md:mt-6">
         <img
           className={"my-4 p-2 rounded-xl bg-white shadow"}
