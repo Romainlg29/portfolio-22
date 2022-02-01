@@ -1,5 +1,6 @@
 import { RoundedBox, Scroll, Sphere, Text, Torus } from "@react-three/drei";
 import { motion } from "framer-motion/three";
+import RotatingCube from "../Cubes/RotatingCube";
 import {
   DarkRoyalBlueMaterial,
   LightRoyalBlueMaterial,
@@ -9,6 +10,24 @@ import {
 const Two = ({ theme, isPhone }) => {
   return (
     <Scroll>
+      <group>
+        <RotatingCube
+          position={[2, -8, -9]}
+          rotation={[0, 2, 1]}
+          scale={0.75}
+          material={RoughMaterialRoyalBlue}
+          rotateOnY
+          rotateOnZ
+        />
+        <RotatingCube
+          position={[-3, -11, -7]}
+          rotation={[0, 2, 1]}
+          scale={0.75}
+          material={RoughMaterialRoyalBlue}
+          rotateOnY
+          rotateOnZ
+        />
+      </group>
       {isPhone ? (
         <group>
           <Text

@@ -4,17 +4,17 @@ from flask import Flask, request, redirect
 from flask_cors import CORS
 import hashlib
 import mariadb
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 from Utils import connectToDatabase
 
 
 # Starting
-env = dotenv_values('.env')
+load_dotenv()
 
-app = Flask("Portfolio")
+app = Flask(__name__)
 CORS(app)
 
-conn, db = connectToDatabase(mariadb, env)
+conn, db = connectToDatabase(mariadb)
 
 # Flask
 
@@ -68,7 +68,7 @@ def overall_analytics():
         return
 
 
-@app.route("/analytics/post", methods=['POST', 'GET'])
+@app.route("/analytics/post", methods=['POST'])
 def posts_analytics():
 
     req = request.get_json()
@@ -101,3 +101,6 @@ def posts_analytics():
             conn.commit()
 
         return ''
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000)

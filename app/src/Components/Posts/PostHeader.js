@@ -4,7 +4,7 @@ import { useEffect } from "react";
 const PostHeader = ({ title, date, id }) => {
   useEffect(() => {
     const sendAnalytics = async () => {
-      fetch("http://localhost:5000/analytics/post", {
+      fetch("https://romain-legall.fr/api/analytics/post", {
         method: "POST",
         headers: {
           Accept: "application/json",

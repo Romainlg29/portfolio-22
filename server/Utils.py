@@ -1,9 +1,9 @@
-from asyncio.windows_events import NULL
+import os
 
 
-def connectToDatabase(mariadb, env):
+def connectToDatabase(mariadb):
     try:
-        db  = mariadb.connect(user=env['MARIADB_USER'], password=env['MARIADB_PASSWORD'], host=env['MARIADB_HOST'], port=3306, database=env['MARIADB_DATABASE'])
+        db  = mariadb.connect(user=os.getenv('MARIADB_USER'), password=os.getenv('MARIADB_PASSWORD'), host=os.getenv('MARIADB_HOST'), port=3306, database=os.getenv('MARIADB_DATABASE'))
         return db, db.cursor(buffered=True)
     except mariadb.Error as e:
         print(f'Cannot connect to MariaDB with : {e}')
