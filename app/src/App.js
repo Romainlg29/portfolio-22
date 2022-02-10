@@ -22,7 +22,7 @@ const App = () => {
         },
         body: JSON.stringify({
           lang: lang,
-          mobile: uad.mobile,
+          mobile: uad.mobile ?? false,
         }),
       });
     };

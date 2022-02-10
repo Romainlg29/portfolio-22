@@ -1,7 +1,7 @@
 # Imports
 from datetime import datetime, timedelta
 from flask import Flask, request, redirect
-from flask_cors import CORS
+#from flask_cors import CORS
 import hashlib
 import mariadb
 from dotenv import load_dotenv
@@ -11,15 +11,12 @@ from Utils import connectToDatabase
 # Starting
 load_dotenv()
 
-app = Flask(__name__)
-CORS(app)
-
-conn, db = connectToDatabase(mariadb)
-
 # Flask
+app = Flask(__name__)
+# CORS(app) DEV ONLY
 
 
-@app.route("/", methods=['POST', 'GET'])
+@app.route("/api/", methods=['POST', 'GET'])
 def status():
     if request.method == 'POST':
         return "Online"
@@ -27,10 +24,14 @@ def status():
         return redirect("https://romain-legall.fr")
 
 
-@app.route("/analytics/overall", methods=['POST', 'GET'])
+@app.route("/api/analytics/overall", methods=['POST', 'GET'])
 def overall_analytics():
+    conn, db = connectToDatabase(mariadb)
     if request.method == 'POST':
         req = request.get_json()
+        if req['lang'] == None or req['mobile'] == None:
+            return ''
+
         hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
 
         db.execute(
@@ -51,7 +52,7 @@ def overall_analytics():
             if olderThan:
                 mobile = 1 if req['mobile'] == True else 0
                 db.execute("INSERT INTO visits_logs (user, period, mobile) VALUES (?, ?, ?)",
-                           (hash, datetime.now(), mobile))
+                           (hash, datetime.now() + timedelta(hours=1), mobile))
 
                 conn.commit()
 
@@ -60,7 +61,7 @@ def overall_analytics():
                 "INSERT INTO unique_visits_logs (user, lang) VALUES (?, ?)", (hash, req['lang']))
 
             db.execute("INSERT INTO visits_logs (user, period) VALUES (?, ?)",
-                       (hash, datetime.now()))
+                       (hash, datetime.now() + timedelta(hours=1)))
 
             conn.commit()
         return ''
@@ -68,10 +69,16 @@ def overall_analytics():
         return
 
 
-@app.route("/analytics/post", methods=['POST'])
+@app.route("/api/analytics/post", methods=['POST'])
 def posts_analytics():
 
+    conn, db = connectToDatabase(mariadb)
+
     req = request.get_json()
+
+    if req['post'] == None:
+        return ''
+
     hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
 
     db.execute(
@@ -80,7 +87,7 @@ def posts_analytics():
     if db.rowcount == -1 or db.rowcount == 0:
 
         db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
-                   (hash, req['post'], datetime.now()))
+                   (hash, req['post'], datetime.now() + timedelta(hours=1)))
 
         conn.commit()
 
@@ -96,11 +103,12 @@ def posts_analytics():
         if (period + timedelta(minutes=10)) < datetime.now():
 
             db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
-                   (hash, req['post'], datetime.now()))
+                       (hash, req['post'], datetime.now() + timedelta(hours=1)))
 
             conn.commit()
 
         return ''
 
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=80)

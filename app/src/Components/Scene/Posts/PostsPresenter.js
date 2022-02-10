@@ -41,6 +41,16 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
           position={isPhone ? [0, 0, 0] : [-2, 0, 0]}
           texture={`${
             process.env.PUBLIC_URL
+          }/Assets/Blog/Deploy-MariaDB/header${theme ? "" : "_dark"}.png`}
+          imageScale={0.7}
+          setCursor={setCursor}
+          onClick={() => window.appHistory.push("/posts/deploy-mariadb")}
+        />
+
+        <GlassPanel
+          position={isPhone ? [0, -2.5, 0] : [2, 0, 0]}
+          texture={`${
+            process.env.PUBLIC_URL
           }/Assets/Blog/Monitoring-Docker/header${theme ? "" : "_dark"}.png`}
           imageScale={0.7}
           setCursor={setCursor}
@@ -50,7 +60,7 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
         />
 
         <GlassPanel
-          position={isPhone ? [0, -2.5, 0] : [2, 0, 0]}
+          position={isPhone ? [0, -5, 0] : [-2, -2.5, 0]}
           texture={`${
             process.env.PUBLIC_URL
           }/Assets/Blog/Dockerize-Wordpress/header${theme ? "" : "_dark"}.png`}
@@ -60,7 +70,7 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
         />
 
         <GlassPanel
-          position={isPhone ? [0, -5, 0] : [-2, -2.5, 0]}
+          position={isPhone ? [0, -7.5, 0] : [2, -2.5, 0]}
           texture={`${process.env.PUBLIC_URL}/Assets/Blog/Autoliv/header${
             theme ? "" : "_dark"
           }.png`}
@@ -70,7 +80,7 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
         />
 
         <GlassPanel
-          position={isPhone ? [0, -7.5, 0] : [2, -2.5, 0]}
+          position={isPhone ? [0, -10, 0] : [-2, -5, 0]}
           texture={`${process.env.PUBLIC_URL}/Assets/Blog/Cryptomator/header${
             theme ? "" : "_dark"
           }.png`}
@@ -82,7 +92,7 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
         />
 
         <GlassPanel
-          position={isPhone ? [0, -10, 0] : [-2, -5, 0]}
+          position={isPhone ? [0, -12.5, 0] : [2, -5, 0]}
           texture={`${process.env.PUBLIC_URL}/Assets/Blog/Syncthing/header${
             theme ? "" : "_dark"
           }.png`}

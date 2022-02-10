@@ -16,7 +16,18 @@ const Four = ({ isPhone, theme, setCursor }) => {
         >
           And explore my latests posts!
         </Text>
+
         <GlassPanel
+          texture={`${
+            process.env.PUBLIC_URL
+          }/Assets/Blog/Deploy-MariaDB/header${theme ? "" : "_dark"}.png`}
+          imageScale={0.7}
+          setCursor={setCursor}
+          onClick={() => window.appHistory.push("/posts/deploy-mariadb")}
+        />
+
+        <GlassPanel
+          position={[0, -2.5, 0]}
           texture={`${
             process.env.PUBLIC_URL
           }/Assets/Blog/Monitoring-Docker/header${theme ? "" : "_dark"}.png`}
@@ -25,15 +36,6 @@ const Four = ({ isPhone, theme, setCursor }) => {
           onClick={() =>
             window.appHistory.push("/posts/monitor-with-prometheus-and-grafana")
           }
-        />
-        <GlassPanel
-          position={[0, -2.5, 0]}
-          texture={`${
-            process.env.PUBLIC_URL
-          }/Assets/Blog/Dockerize-Wordpress/header${theme ? "" : "_dark"}.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() => window.appHistory.push("/posts/dockerize-wordpress")}
         />
 
         <Torus
