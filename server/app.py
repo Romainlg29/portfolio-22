@@ -13,7 +13,7 @@ load_dotenv()
 
 # Flask
 app = Flask(__name__)
-# CORS(app) DEV ONLY
+#CORS(app)  # DEV ONLY
 
 
 @app.route("/api/", methods=['POST', 'GET'])
@@ -29,8 +29,6 @@ def overall_analytics():
     conn, db = connectToDatabase(mariadb)
     if request.method == 'POST':
         req = request.get_json()
-        if req['lang'] == None or req['mobile'] == None:
-            return ''
 
         hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
 
@@ -51,22 +49,28 @@ def overall_analytics():
 
             if olderThan:
                 mobile = 1 if req['mobile'] == True else 0
-                db.execute("INSERT INTO visits_logs (user, period, mobile) VALUES (?, ?, ?)",
-                           (hash, datetime.now() + timedelta(hours=1), mobile))
 
-                conn.commit()
+                db.execute(
+                    "SELECT id FROM unique_visits_logs WHERE user=?", (hash,))
+
+                for i in db:
+
+                    db.execute("INSERT INTO visits_logs (user, period, mobile) VALUES (?, ?, ?)",
+                               (i[0], datetime.now() + timedelta(hours=1), mobile))
+
+                    conn.commit()
 
         else:
             db.execute(
                 "INSERT INTO unique_visits_logs (user, lang) VALUES (?, ?)", (hash, req['lang']))
 
             db.execute("INSERT INTO visits_logs (user, period) VALUES (?, ?)",
-                       (hash, datetime.now() + timedelta(hours=1)))
+                       (db.lastrowid, datetime.now() + timedelta(hours=1)))
 
             conn.commit()
         return ''
     else:
-        return
+        return ''
 
 
 @app.route("/api/analytics/post", methods=['POST'])
@@ -81,13 +85,20 @@ def posts_analytics():
 
     hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
 
+    id = 0
+    db.execute(
+        "SELECT id FROM unique_visits_logs WHERE user=?", (hash,))
+
+    for i in db:
+        id = i[0]
+
     db.execute(
         "SELECT period FROM posts_logs WHERE user=? AND post=? ORDER BY id DESC LIMIT 1", (hash, req['post']))
 
     if db.rowcount == -1 or db.rowcount == 0:
 
         db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
-                   (hash, req['post'], datetime.now() + timedelta(hours=1)))
+                   (id, req['post'], datetime.now() + timedelta(hours=1)))
 
         conn.commit()
 
@@ -103,7 +114,7 @@ def posts_analytics():
         if (period + timedelta(minutes=10)) < datetime.now():
 
             db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
-                       (hash, req['post'], datetime.now() + timedelta(hours=1)))
+                       (id, req['post'], datetime.now() + timedelta(hours=1)))
 
             conn.commit()
 

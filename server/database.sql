@@ -1,11 +1,12 @@
 CREATE TABLE unique_visits_logs (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     user VARCHAR(64) CHARACTER SET latin1 COLLATE latin1_general_CI NOT NULL,
     lang VARCHAR(5) NOT NULL,
-    PRIMARY KEY (user)
+    PRIMARY KEY (id)
 );
 CREATE TABLE visits_logs (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    user VARCHAR(64) CHARACTER SET latin1 COLLATE latin1_general_ci REFERENCES unique_visits_logs(user),
+    user INT UNSIGNED NOT NULL REFERENCES unique_visits_logs(id),
     period DATETIME NOT NULL,
     mobile BOOLEAN DEFAULT 0,
     PRIMARY KEY (id)
@@ -17,7 +18,7 @@ CREATE TABLE posts (
 );
 CREATE TABLE posts_logs (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    user VARCHAR(64) CHARACTER SET latin1 COLLATE latin1_general_ci REFERENCES unique_visits_logs(user),
+    user INT UNSIGNED REFERENCES unique_visits_logs(id),
     post INT UNSIGNED REFERENCES posts(id),
     period DATETIME NOT NULL,
     PRIMARY KEY (id)
