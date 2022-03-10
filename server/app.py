@@ -40,8 +40,17 @@ def overall_analytics():
             alreadyExists = True if c[0] == 1 else False
 
         if alreadyExists:
+
+            id = 0
+
             db.execute(
-                "SELECT COUNT(*) FROM visits_logs WHERE user=? AND period < NOW() - INTERVAL 10 MINUTE", (hash, ))
+                "SELECT id FROM unique_visits_logs WHERE user=?", (hash,))
+
+            for i in db:
+                id = i[0]
+
+            db.execute(
+                "SELECT COUNT(*) FROM visits_logs WHERE user=? AND period < NOW() - INTERVAL 10 MINUTE", (id, ))
 
             olderThan = False
             for d in db:
@@ -50,15 +59,10 @@ def overall_analytics():
             if olderThan:
                 mobile = 1 if req['mobile'] == True else 0
 
-                db.execute(
-                    "SELECT id FROM unique_visits_logs WHERE user=?", (hash,))
+                db.execute("INSERT INTO visits_logs (user, period, mobile) VALUES (?, ?, ?)",
+                           (id, datetime.now() + timedelta(hours=1), mobile))
 
-                for i in db:
-
-                    db.execute("INSERT INTO visits_logs (user, period, mobile) VALUES (?, ?, ?)",
-                               (i[0], datetime.now() + timedelta(hours=1), mobile))
-
-                    conn.commit()
+                conn.commit()
 
         else:
             db.execute(
