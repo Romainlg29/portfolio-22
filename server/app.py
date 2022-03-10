@@ -13,7 +13,7 @@ load_dotenv()
 
 # Flask
 app = Flask(__name__)
-#CORS(app)  # DEV ONLY
+# CORS(app)  # DEV ONLY
 
 
 @app.route("/api/", methods=['POST', 'GET'])
@@ -62,7 +62,7 @@ def overall_analytics():
 
         else:
             db.execute(
-                "INSERT INTO unique_visits_logs (user, lang) VALUES (?, ?)", (hash, req['lang']))
+                "INSERT INTO unique_visits_logs (user, lang, period) VALUES (?, ?, ?)", (hash, req['lang'], datetime.now() + timedelta(hours=1)))
 
             db.execute("INSERT INTO visits_logs (user, period) VALUES (?, ?)",
                        (db.lastrowid, datetime.now() + timedelta(hours=1)))
