@@ -13,7 +13,7 @@ load_dotenv()
 
 # Flask
 app = Flask(__name__)
-# CORS(app)  # DEV ONLY
+#CORS(app)  # DEV ONLY
 
 
 @app.route("/api/", methods=['POST', 'GET'])
@@ -24,76 +24,89 @@ def status():
         return redirect("https://romain-legall.fr")
 
 
-@app.route("/api/analytics/overall", methods=['POST', 'GET'])
+@app.route("/api/analytics/overall", methods=['POST'])
 def overall_analytics():
+
+    # Connect to DB and get post data
     conn, db = connectToDatabase(mariadb)
-    if request.method == 'POST':
-        req = request.get_json()
+    req = request.get_json()
 
-        hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
+    # Anonymise the user's ip
+    hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
 
+    # Check if this hash already exists
+    db.execute(
+        "SELECT COUNT(*) FROM unique_visits_logs WHERE user=?", (hash,))
+
+    # Get the req result
+    alreadyExists = False
+    for c in db:
+        alreadyExists = True if c[0] == 1 else False
+
+    if alreadyExists:
+        
+        print("This user already exists!")
+        
+        # Get the id
+        id = 0
         db.execute(
-            "SELECT COUNT(*) FROM unique_visits_logs WHERE user=?", (hash,))
+            "SELECT id FROM unique_visits_logs WHERE user=?", (hash,))
 
-        alreadyExists = False
-        for c in db:
-            alreadyExists = True if c[0] == 1 else False
+        for i in db:
+            id = i[0]
 
-        if alreadyExists:
+        # Check if it's a refresh
+        db.execute(
+            "SELECT period FROM visits_logs WHERE user=? AND period > DATE_SUB(NOW(), INTERVAL 5 MINUTE);", (id, ))
 
-            id = 0
+        olderThan = True if db.rowcount == 0 else False
 
-            db.execute(
-                "SELECT id FROM unique_visits_logs WHERE user=?", (hash,))
+        print(f'The last log from {id} is {"older" if olderThan else "newer"} than 5 minutes!')
 
-            for i in db:
-                id = i[0]
+        if olderThan:
+            mobile = 1 if req['mobile'] == True else 0
 
-            db.execute(
-                "SELECT COUNT(*) FROM visits_logs WHERE user=? AND period < NOW() - INTERVAL 10 MINUTE", (id, ))
+            # If not a refresh, it'll add this to the log
+            db.execute("INSERT INTO visits_logs (user, period, mobile) VALUES (?, ?, ?)",
+                       (id, datetime.now() + timedelta(hours=1), mobile))
 
-            olderThan = False
-            for d in db:
-                olderThan = True if d[0] == 1 else False
-
-            if olderThan:
-                mobile = 1 if req['mobile'] == True else 0
-
-                db.execute("INSERT INTO visits_logs (user, period, mobile) VALUES (?, ?, ?)",
-                           (id, datetime.now() + timedelta(hours=1), mobile))
-
-                conn.commit()
-
-        else:
-            db.execute(
-                "INSERT INTO unique_visits_logs (user, lang, period) VALUES (?, ?, ?)", (hash, req['lang'], datetime.now() + timedelta(hours=1)))
-
-            db.execute("INSERT INTO visits_logs (user, period) VALUES (?, ?)",
-                       (db.lastrowid, datetime.now() + timedelta(hours=1)))
-
+            print(f'New log from {id} !')
             conn.commit()
 
-        conn.close()
-        return ''
     else:
-        conn.close()
-        return ''
+        # Insert the new user
+        db.execute(
+            "INSERT INTO unique_visits_logs (user, lang, period) VALUES (?, ?, ?)", (hash, req['lang'], datetime.now() + timedelta(hours=1)))
 
+        print(f'New log from a new user : {db.lastrowid}')
+
+        db.execute("INSERT INTO visits_logs (user, period) VALUES (?, ?)",
+                   (db.lastrowid, datetime.now() + timedelta(hours=1)))
+
+        conn.commit()
+
+    print("Connection closed!")
+    conn.close()
+    return ''
 
 
 @app.route("/api/analytics/post", methods=['POST'])
 def posts_analytics():
 
+    # Connect to DB and get post data
     conn, db = connectToDatabase(mariadb)
-
     req = request.get_json()
 
+    # If no data from post, it'll return nothing
     if req['post'] == None:
+        print("Connection closed!")
         conn.close()
         return ''
 
+    # Anonymise the user's ip
     hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
 
+    # Check if this hash already exists
     id = 0
     db.execute(
         "SELECT id FROM unique_visits_logs WHERE user=?", (hash,))
@@ -101,14 +114,16 @@ def posts_analytics():
     for i in db:
         id = i[0]
 
+    # Check if the user already watched this post
     db.execute(
-        "SELECT period FROM posts_logs WHERE user=? AND post=? ORDER BY id DESC LIMIT 1", (hash, req['post']))
+        "SELECT period FROM posts_logs WHERE user=? AND post=? ORDER BY id DESC LIMIT 1", (id, req['post']))
 
     if db.rowcount == -1 or db.rowcount == 0:
 
         db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
                    (id, req['post'], datetime.now() + timedelta(hours=1)))
 
+        print(f'New log from {id} !')
         conn.commit()
         conn.close()
         return ''
@@ -120,13 +135,17 @@ def posts_analytics():
         for d in db:
             period = d[0]
 
+        #  Check if it's a refresh
         if (period + timedelta(minutes=10)) < datetime.now():
 
+            # If not, it'll insert logs
             db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
                        (id, req['post'], datetime.now() + timedelta(hours=1)))
 
+            print(f'New log from {id} !')
             conn.commit()
 
+        print("Connection closed!")
         conn.close()
         return ''
 
