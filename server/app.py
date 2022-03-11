@@ -72,9 +72,13 @@ def overall_analytics():
                        (db.lastrowid, datetime.now() + timedelta(hours=1)))
 
             conn.commit()
+
+        conn.close()
         return ''
     else:
+        conn.close()
         return ''
+
 
 
 @app.route("/api/analytics/post", methods=['POST'])
@@ -85,6 +89,7 @@ def posts_analytics():
     req = request.get_json()
 
     if req['post'] == None:
+        conn.close()
         return ''
 
     hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
@@ -105,7 +110,7 @@ def posts_analytics():
                    (id, req['post'], datetime.now() + timedelta(hours=1)))
 
         conn.commit()
-
+        conn.close()
         return ''
 
     else:
@@ -122,6 +127,7 @@ def posts_analytics():
 
             conn.commit()
 
+        conn.close()
         return ''
 
 
