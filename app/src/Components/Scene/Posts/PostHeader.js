@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const PostHeader = ({ title, date, id }) => {
+
   useEffect(() => {
     const sendAnalytics = async () => {
       fetch("https://romain-legall.fr/api/analytics/post", {
@@ -19,7 +20,9 @@ const PostHeader = ({ title, date, id }) => {
   });
 
   return (
-    <div className="w-screen flex flex-col justify-center items-center p-2">
+    <div
+      className="w-screen flex flex-col justify-center items-center p-2"
+    >
       <motion.div
         className="flex justify-center items-center px-2 py-1 rounded-3xl shadow shadow-blue-200 bg-blue-100  hover:shadow-blue-300 cursor-pointer transition-all"
         onClick={() => window.appHistory.push("/posts")}

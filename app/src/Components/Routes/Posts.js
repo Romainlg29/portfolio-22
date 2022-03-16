@@ -14,11 +14,13 @@ const Posts = ({ isPhone }) => {
       <Switch location={location} key={location.pathname}>
         {Posts &&
           Posts.map((p) => {
-            const Component = lazy(() => import(`../Posts/${p.component}`));
+            const Component = lazy(() =>
+              import(`../Scene/Posts/${p.component}`)
+            );
             return (
               <Route path={`/posts${p.url}`} key={`posts${p.url}`} exact>
                 <Suspense fallback={<SuspenseScreen />}>
-                  <Component title={p.title} date={p.date} id={p.id}/>
+                  <Component title={p.title} date={p.date} id={p.id} />
                 </Suspense>
               </Route>
             );

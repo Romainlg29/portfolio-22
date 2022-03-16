@@ -58,7 +58,7 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
                 }.png`}
                 imageScale={0.7}
                 setCursor={setCursor}
-                onClick={() => window.appHistory.push("/posts/deploy-mariadb")}
+                onClick={() => window.appHistory.push(`/posts${p.url}`)}
               />
             );
           })}

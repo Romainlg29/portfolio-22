@@ -3,8 +3,11 @@ import { RoughMaterialRoyalBlue } from "../Materials";
 import GlassPanel from "../Images/GlassPanel";
 import RotatingCube from "../Cubes/RotatingCube";
 import { motion } from "framer-motion/three";
+import posts from "../../../Assets/Posts.json";
 
 const Four = ({ isPhone, theme, setCursor }) => {
+  const Posts = JSON.parse(JSON.stringify(posts));
+
   return (
     <Scroll>
       <group position={[0, -22, 0]}>
@@ -17,26 +20,21 @@ const Four = ({ isPhone, theme, setCursor }) => {
           And explore my latests posts!
         </Text>
 
-        <GlassPanel
-          texture={`${
-            process.env.PUBLIC_URL
-          }/Assets/Blog/Deploy-MariaDB/header${theme ? "" : "_dark"}.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() => window.appHistory.push("/posts/deploy-mariadb")}
-        />
-
-        <GlassPanel
-          position={[0, -2.5, 0]}
-          texture={`${
-            process.env.PUBLIC_URL
-          }/Assets/Blog/Monitoring-Docker/header${theme ? "" : "_dark"}.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() =>
-            window.appHistory.push("/posts/monitor-with-prometheus-and-grafana")
-          }
-        />
+        {Posts &&
+          Posts.slice(0, 2).map((e, k) => {
+            return (
+              <GlassPanel
+              key={`post_${k}`}
+                position={[0, k * -2.5, 0]}
+                texture={`${
+                  process.env.PUBLIC_URL + e.assets
+                }/header${theme ? "" : "_dark"}.png`}
+                imageScale={0.7}
+                setCursor={setCursor}
+                onClick={() => window.appHistory.push(`/posts${e.url}`)}
+              />
+            );
+          })}
 
         <Torus
           position={[-2, -1.75, -2]}
