@@ -8,8 +8,13 @@ import {
 import GlassPanel from "../Images/GlassPanel";
 import { motion } from "framer-motion/three";
 import { RoughMaterialRoyalBlue } from "../Materials";
+import posts from "../../../Assets/Posts.json";
+import { useRef, memo } from "react";
 
 const PostsPresenter = ({ setCursor, theme, isPhone }) => {
+  const Posts = JSON.parse(JSON.stringify(posts));
+  const counter = useRef(0);
+
   return (
     <Scroll>
       <motion.mesh
@@ -37,73 +42,26 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
         Explore my posts!
       </Text>
       <group position={[0, 1, 0]}>
-        <GlassPanel
-          position={isPhone ? [0, 0, 0] : [-2, 0, 0]}
-          texture={`${
-            process.env.PUBLIC_URL
-          }/Assets/Blog/Deploy-MariaDB/header${theme ? "" : "_dark"}.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() => window.appHistory.push("/posts/deploy-mariadb")}
-        />
-
-        <GlassPanel
-          position={isPhone ? [0, -2.5, 0] : [2, 0, 0]}
-          texture={`${
-            process.env.PUBLIC_URL
-          }/Assets/Blog/Monitoring-Docker/header${theme ? "" : "_dark"}.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() =>
-            window.appHistory.push("/posts/monitor-with-prometheus-and-grafana")
-          }
-        />
-
-        <GlassPanel
-          position={isPhone ? [0, -5, 0] : [-2, -2.5, 0]}
-          texture={`${
-            process.env.PUBLIC_URL
-          }/Assets/Blog/Dockerize-Wordpress/header${theme ? "" : "_dark"}.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() => window.appHistory.push("/posts/dockerize-wordpress")}
-        />
-
-        <GlassPanel
-          position={isPhone ? [0, -7.5, 0] : [2, -2.5, 0]}
-          texture={`${process.env.PUBLIC_URL}/Assets/Blog/Autoliv/header${
-            theme ? "" : "_dark"
-          }.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() => window.appHistory.push("/posts/internship-at-autoliv")}
-        />
-
-        <GlassPanel
-          position={isPhone ? [0, -10, 0] : [-2, -5, 0]}
-          texture={`${process.env.PUBLIC_URL}/Assets/Blog/Cryptomator/header${
-            theme ? "" : "_dark"
-          }.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() =>
-            window.appHistory.push("/posts/enhance-your-syncing-security")
-          }
-        />
-
-        <GlassPanel
-          position={isPhone ? [0, -12.5, 0] : [2, -5, 0]}
-          texture={`${process.env.PUBLIC_URL}/Assets/Blog/Syncthing/header${
-            theme ? "" : "_dark"
-          }.png`}
-          imageScale={0.7}
-          setCursor={setCursor}
-          onClick={() =>
-            window.appHistory.push(
-              "/posts/how-to-synchronize-your-devices-easily"
-            )
-          }
-        />
+        {Posts &&
+          Posts.map((p, k) => {
+            if (k % 2 === 0 && k !== 0) counter.current += 1;
+            return (
+              <GlassPanel
+                key={`post_${k}`}
+                position={
+                  isPhone
+                    ? [0, k * -2.5, 0]
+                    : [k % 2 === 0 ? -2 : 2, counter.current * -2.5, 0]
+                }
+                texture={`${process.env.PUBLIC_URL + p.assets}/header${
+                  theme ? "" : "_dark"
+                }.png`}
+                imageScale={0.7}
+                setCursor={setCursor}
+                onClick={() => window.appHistory.push("/posts/deploy-mariadb")}
+              />
+            );
+          })}
       </group>
       <group>
         <RoundedBox
@@ -131,4 +89,4 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
     </Scroll>
   );
 };
-export default PostsPresenter;
+export default memo(PostsPresenter);

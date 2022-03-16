@@ -21,7 +21,7 @@ const App = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          lang: lang,
+          lang: lang ?? "bot",
           mobile: uad.mobile ?? false,
         }),
       });

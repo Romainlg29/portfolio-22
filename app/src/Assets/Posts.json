@@ -4,41 +4,47 @@
     "title": "Deploy a secure MariaDB on Docker Swarm!",
     "date": "February 09th 2022",
     "url": "/deploy-mariadb",
-    "component": "DeploySecureMariaDB.js"
+    "component": "DeploySecureMariaDB.js",
+    "assets": "/Assets/Blog/Deploy-MariaDB"
   },
   {
     "id": 5,
     "title": "Monitor your server with Prometheus and Grafana!",
     "date": "November 29th 2021",
     "url": "/monitor-with-prometheus-and-grafana",
-    "component": "MonitorContainers.js"
+    "component": "MonitorContainers.js",
+    "assets": "/Assets/Blog/Monitoring-Docker"
   },
   {
     "id": 4,
     "title": "Dockerize Wordpress!",
     "date": "October 26th 2021",
     "url": "/dockerize-wordpress",
-    "component": "DockerizeWordpress.js"
+    "component": "DockerizeWordpress.js",
+    "assets": "/Assets/Blog/Dockerize-Wordpress"
   },
   {
     "id": 3,
     "title": "Internship at Autoliv!",
     "date": "June 29th 2021",
     "url": "/internship-at-autoliv",
-    "component": "InternshipAtAutoliv.js"
+    "component": "InternshipAtAutoliv.js",
+    "assets": "/Assets/Blog/Autoliv"
   },
   {
     "id": 2,
     "title": "Enhance your syncing security!",
     "date": "January 5th 2021",
     "url": "/enhance-your-syncing-security",
-    "component": "CryptomatorSyncing.js"
+    "component": "CryptomatorSyncing.js",
+    "assets": "/Assets/Blog/Cryptomator"
   },
   {
     "id": 1,
     "title": "How to synchronize your devices easily!",
     "date": "January 5th 2021",
     "url": "/how-to-synchronize-your-devices-easily",
-    "component": "SynchronizeDevices.js"
+    "component": "SynchronizeDevices.js",
+    "assets": "/Assets/Blog/Syncthing"
   }
 ]

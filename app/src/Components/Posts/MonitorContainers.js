@@ -239,10 +239,10 @@ const MonitorContainers = ({ title, date, id }) => {
           <CodeParagraph tab={8}>- "traefik.backend=grafana"</CodeParagraph>
           <CodeParagraph tab={8}>- "traefik.enable=true"</CodeParagraph>
           <CodeParagraph tab={8}>
-            - "traefik.http.routers.prometheus.rule=Host(`monitor.YOUR_DOMAIN`)"
+            - "traefik.http.routers.grafana.rule=Host(`monitor.YOUR_DOMAIN`)"
           </CodeParagraph>
           <CodeParagraph tab={8}>
-            - "traefik.http.services.prometheus.loadbalancer.server.port=3000"
+            - "traefik.http.services.grafana.loadbalancer.server.port=3000"
           </CodeParagraph>
           <CodeParagraph tab={8}>- "traefik.port=80"</CodeParagraph>
           <CodeParagraph tab={0}>networks: #Retrieve our network</CodeParagraph>
