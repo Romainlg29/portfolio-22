@@ -32,7 +32,7 @@ def overall_analytics():
     req = request.get_json()
 
     # Anonymise the user's ip
-    hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
+    hash = hashlib.sha256(request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
 
     # Check if this hash already exists
     db.execute(
@@ -104,7 +104,7 @@ def posts_analytics():
         return ''
 
     # Anonymise the user's ip
-    hash = hashlib.sha256(request.remote_addr.encode('utf8')).hexdigest()
+    hash = hashlib.sha256(request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
 
     # Check if this hash already exists
     id = 0
