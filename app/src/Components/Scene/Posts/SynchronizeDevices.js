@@ -4,7 +4,7 @@ import PostWrapper from "./Presenter/PostWrapper";
 import PostHeader from "./PostHeader";
 import InformationToast from "./Presenter/InformationToast";
 
-const SynchronizeDevices = ({ title, date, id }) => {
+const SynchronizeDevices = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
 
   const docRef = useRef(null);
@@ -17,7 +17,10 @@ const SynchronizeDevices = ({ title, date, id }) => {
   }, []);
 
   return (
-    <PostWrapper pages={height / document.documentElement.offsetHeight}>
+    <PostWrapper
+      pages={height / document.documentElement.offsetHeight}
+      isPhone={isPhone}
+    >
       <AnimatePresence exitBeforeEnter>
         {infoText && infoText !== "" ? (
           <InformationToast text={infoText} setText={setInfoText} />

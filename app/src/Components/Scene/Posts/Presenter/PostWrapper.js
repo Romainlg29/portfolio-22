@@ -3,7 +3,7 @@ import Lights from "../../Lights";
 import { Canvas } from "@react-three/fiber";
 import RandomMesh from "../../../Utils/RandomMesh";
 
-const PostWrapper = ({ pages = 1, children }) => {
+const PostWrapper = ({ pages = 1, children, isPhone }) => {
   return (
     <Canvas
       colorManagement
@@ -18,16 +18,17 @@ const PostWrapper = ({ pages = 1, children }) => {
       <ScrollControls pages={pages} damping={4} distance={2}>
         <Scroll html>{children}</Scroll>
         <Scroll>
-          {Array(pages === 0 ? 1 : Math.ceil(pages * 1.5))
-            .fill(0)
-            .map((_, k) => {
-              return (
-                <RandomMesh
-                  key={`RandomMesh_${k}`}
-                  position={[k % 2 === 0 ? 5.5 : -6, (k + 1) * -5, -1]}
-                />
-              );
-            })}
+          {!isPhone &&
+            Array(pages === 0 ? 1 : Math.ceil(pages * 1.5))
+              .fill(0)
+              .map((_, k) => {
+                return (
+                  <RandomMesh
+                    key={`RandomMesh_${k}`}
+                    position={[k % 2 === 0 ? 5.5 : -6, (k + 1) * -5, -1]}
+                  />
+                );
+              })}
         </Scroll>
       </ScrollControls>
       <Lights />

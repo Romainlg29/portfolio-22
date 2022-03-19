@@ -5,7 +5,7 @@ import PostHeader from "./PostHeader";
 import InformationToast from "./Presenter/InformationToast";
 import ParagraphImp from "./Presenter/ParagraphImp";
 
-const DockerizeWordpress = ({ title, date, id }) => {
+const DockerizeWordpress = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
 
   const docRef = useRef(null);
@@ -18,7 +18,10 @@ const DockerizeWordpress = ({ title, date, id }) => {
   }, []);
 
   return (
-    <PostWrapper pages={height / document.documentElement.offsetHeight}>
+    <PostWrapper
+      pages={height / document.documentElement.offsetHeight}
+      isPhone={isPhone}
+    >
       <AnimatePresence exitBeforeEnter>
         {infoText && infoText !== "" ? (
           <InformationToast text={infoText} setText={setInfoText} />

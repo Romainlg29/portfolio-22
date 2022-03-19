@@ -8,7 +8,7 @@ import InformationToast from "./Presenter/InformationToast";
 import { useEffect, useRef, useState } from "react";
 import PostWrapper from "./Presenter/PostWrapper";
 
-const MonitorContainers = ({ title, date, id }) => {
+const MonitorContainers = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
 
   const docRef = useRef(null);
@@ -23,6 +23,7 @@ const MonitorContainers = ({ title, date, id }) => {
   return (
     <PostWrapper
       pages={height / document.documentElement.offsetHeight}
+      isPhone={isPhone}
     >
       <AnimatePresence exitBeforeEnter>
         {infoText && infoText !== "" ? (

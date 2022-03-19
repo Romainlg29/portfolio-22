@@ -3,7 +3,7 @@ import PostHeader from "./PostHeader";
 import { useEffect, useRef, useState } from "react";
 import PostWrapper from "./Presenter/PostWrapper";
 
-const CryptomatorSyncing = ({ title, date, id }) => {
+const CryptomatorSyncing = ({ title, date, id, isPhone }) => {
   const docRef = useRef(null);
   const [height, setHeight] = useState(0);
 
@@ -14,7 +14,10 @@ const CryptomatorSyncing = ({ title, date, id }) => {
   }, []);
 
   return (
-    <PostWrapper pages={height / document.documentElement.offsetHeight}>
+    <PostWrapper
+      pages={height / document.documentElement.offsetHeight}
+      isPhone={isPhone}
+    >
       <PostHeader title={title} date={date} id={id} />
       <div className="w-screen flex flex-col items-center" ref={docRef}>
         <div className="w-11/12 lg:w-3/5 mt-2 md:mt-6">
