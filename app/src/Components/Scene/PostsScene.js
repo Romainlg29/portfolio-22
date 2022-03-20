@@ -23,7 +23,7 @@ const PostsScene = ({ isPhone }) => {
       }}
     >
       <Preload all />
-      <ScrollControls pages={isPhone ? 2.2 : 1.25} damping={4} distance={2}>
+      <ScrollControls pages={isPhone ? 2.55 : 1.55} damping={4} distance={2}>
         <PostsPresenter setCursor={setCursor} theme={theme} isPhone={isPhone} />
       </ScrollControls>
       <Lights />

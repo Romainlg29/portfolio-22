@@ -1,5 +1,13 @@
 [
   {
+    "id": 7,
+    "title": "Use MySQL as a datasource for your Grafana!",
+    "date": "March 20th 2022",
+    "url": "/stats-with-mysql",
+    "component": "StatsWithMysql.js",
+    "assets": "/Assets/Blog/Stats-Mysql"
+  },
+  {
     "id": 6,
     "title": "Deploy a secure MariaDB on Docker Swarm!",
     "date": "February 09th 2022",
