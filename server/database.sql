@@ -10,6 +10,7 @@ CREATE TABLE visits_logs (
     user INT UNSIGNED NOT NULL REFERENCES unique_visits_logs(id),
     period DATETIME NOT NULL,
     mobile BOOLEAN DEFAULT 0,
+    referrer VARCHAR(255),
     PRIMARY KEY (id)
 );
 CREATE TABLE posts (
@@ -22,5 +23,6 @@ CREATE TABLE posts_logs (
     user INT UNSIGNED REFERENCES unique_visits_logs(id),
     post INT UNSIGNED REFERENCES posts(id),
     period DATETIME NOT NULL,
+    referrer VARCHAR(255),
     PRIMARY KEY (id)
 );

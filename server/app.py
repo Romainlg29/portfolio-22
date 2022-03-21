@@ -34,6 +34,8 @@ def overall_analytics():
     # Anonymise the user's ip
     hash = hashlib.sha256(request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
 
+    print(f'User comes from {req["from"]}')
+
     # Check if this hash already exists
     db.execute(
         "SELECT COUNT(*) FROM unique_visits_logs WHERE user=?", (hash,))
@@ -67,8 +69,8 @@ def overall_analytics():
             mobile = 1 if req['mobile'] == True else 0
 
             # If not a refresh, it'll add this to the log
-            db.execute("INSERT INTO visits_logs (user, period, mobile) VALUES (?, ?, ?)",
-                       (id, datetime.now() + timedelta(hours=1), mobile))
+            db.execute("INSERT INTO visits_logs (user, period, mobile, referrer) VALUES (?, ?, ?, ?)",
+                       (id, datetime.now() + timedelta(hours=1), mobile, req['from']))
 
             print(f'New log from {id} !')
             conn.commit()
@@ -80,8 +82,8 @@ def overall_analytics():
 
         print(f'New log from a new user : {db.lastrowid}')
 
-        db.execute("INSERT INTO visits_logs (user, period) VALUES (?, ?)",
-                   (db.lastrowid, datetime.now() + timedelta(hours=1)))
+        db.execute("INSERT INTO visits_logs (user, period, referrer) VALUES (?, ?, ?)",
+                   (db.lastrowid, datetime.now() + timedelta(hours=1), req['from']))
 
         conn.commit()
 
@@ -120,8 +122,8 @@ def posts_analytics():
 
     if db.rowcount == -1 or db.rowcount == 0:
 
-        db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
-                   (id, req['post'], datetime.now() + timedelta(hours=1)))
+        db.execute("INSERT INTO posts_logs (user, post, period, referrer) VALUES (?, ?, ?, ?)",
+                   (id, req['post'], datetime.now() + timedelta(hours=1), req['from']))
 
         print(f'New log from {id} !')
         conn.commit()
@@ -139,8 +141,8 @@ def posts_analytics():
         if (period + timedelta(minutes=10)) < datetime.now():
 
             # If not, it'll insert logs
-            db.execute("INSERT INTO posts_logs (user, post, period) VALUES (?, ?, ?)",
-                       (id, req['post'], datetime.now() + timedelta(hours=1)))
+            db.execute("INSERT INTO posts_logs (user, post, period, referrer) VALUES (?, ?, ?, ?)",
+                       (id, req['post'], datetime.now() + timedelta(hours=1), req['from']))
 
             print(f'New log from {id} !')
             conn.commit()
