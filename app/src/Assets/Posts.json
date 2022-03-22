@@ -1,5 +1,15 @@
 [
   {
+    "id": 8,
+    "title": "Create a map with Grafana",
+    "date": "March 22th 2022",
+    "url": "/map-with-grafana",
+    "component": "MapWithGrafana.js",
+    "assets": "/Assets/Blog/Map-Grafana",
+    "description": "A recent update of Grafana rolled out a new map component called Geomap. Today, we're going to setup our own map by using the lookup mode.",
+    "keywords": "MySQL, Grafana, data sources, database, graph, stats, map, geomap, heatmap, lookup, analytics, easy, fast, tutorial"
+  },
+  {
     "id": 7,
     "title": "Use MySQL as a datasource for your Grafana!",
     "date": "March 20th 2022",
