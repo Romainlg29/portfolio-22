@@ -1,5 +1,5 @@
 import { Scroll, Text } from "@react-three/drei";
-import { motion } from "framer-motion/three";
+import { motion } from "framer-motion-3d";
 import { useState } from "react";
 import RotatingCube from "../Cubes/RotatingCube";
 import { RoughMaterialRoyalBlue } from "../Materials";

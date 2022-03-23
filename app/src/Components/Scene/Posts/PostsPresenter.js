@@ -6,7 +6,7 @@ import {
   Torus,
 } from "@react-three/drei";
 import GlassPanel from "../Images/GlassPanel";
-import { motion } from "framer-motion/three";
+import { motion } from "framer-motion-3d";
 import { RoughMaterialRoyalBlue } from "../Materials";
 import posts from "../../../Assets/Posts.json";
 import { useRef, memo } from "react";

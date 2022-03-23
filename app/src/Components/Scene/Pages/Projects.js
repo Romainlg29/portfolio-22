@@ -1,6 +1,6 @@
 import { Scroll, Text } from "@react-three/drei";
 import GlassPanel from "../Images/GlassPanel";
-import { motion } from "framer-motion/three";
+import { motion } from "framer-motion-3d";
 
 const Projects = ({ theme, setCursor, isPhone }) => {
   return (

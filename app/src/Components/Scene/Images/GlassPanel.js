@@ -1,7 +1,7 @@
 import { RoundedBox } from "@react-three/drei";
 import ImageMesh from "../Images/ImageMesh";
 import { GlassMaterial } from "../Materials";
-import { motion } from "framer-motion/three";
+import { motion } from "framer-motion-3d";
 
 const GlassPanel = ({
   setCursor,

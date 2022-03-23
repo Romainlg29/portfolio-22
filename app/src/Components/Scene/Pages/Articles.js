@@ -2,7 +2,7 @@ import { Scroll, Tetrahedron, Text, Torus } from "@react-three/drei";
 import { RoughMaterialRoyalBlue } from "../Materials";
 import GlassPanel from "../Images/GlassPanel";
 import RotatingCube from "../Cubes/RotatingCube";
-import { motion } from "framer-motion/three";
+import { motion } from "framer-motion-3d";
 import posts from "../../../Assets/Posts.json";
 
 const Four = ({ isPhone, theme, setCursor }) => {

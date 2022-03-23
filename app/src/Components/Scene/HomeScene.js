@@ -1,7 +1,7 @@
-import { MotionCanvas } from "framer-motion/three";
+import { MotionCanvas } from "framer-motion-3d";
 import { Preload, ScrollControls, useCursor } from "@react-three/drei";
 import Lights from "./Lights";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Begin from "./Pages/Begin";
 import Action from "./Pages/Action";
 import Camera from "./Cameras/Camera";
@@ -21,22 +21,26 @@ const HomeScene = ({ isPhone }) => {
       dpr={[1, 2]}
       style={{
         backgroundColor: theme ? "#F1F4F8" : "#0E0B07",
+        width: "100%",
       }}
+      mode="concurrent"
     >
-      <Preload all />
-      <ScrollControls pages={isPhone ? 2.75 : 2.85} damping={4} distance={2}>
-        <Camera isPhone={isPhone} />
-        <Begin
-          theme={theme}
-          setTheme={() => setTheme(!theme)}
-          setCursor={setCursor}
-        />
-        <Action theme={theme} isPhone={isPhone} />
-        <Projects theme={theme} isPhone={isPhone} setCursor={setCursor} />
-        <Articles theme={theme} isPhone={isPhone} setCursor={setCursor} />
-        <Medias theme={theme} isPhone={isPhone} setCursor={setCursor} />
-      </ScrollControls>
-      <Lights />
+      <Suspense fallback={null}>
+        <Preload all />
+        <ScrollControls pages={isPhone ? 2.75 : 2.85} damping={4} distance={2}>
+          <Camera isPhone={isPhone} />
+          <Begin
+            theme={theme}
+            setTheme={() => setTheme(!theme)}
+            setCursor={setCursor}
+          />
+          <Action theme={theme} isPhone={isPhone} />
+          <Projects theme={theme} isPhone={isPhone} setCursor={setCursor} />
+          <Articles theme={theme} isPhone={isPhone} setCursor={setCursor} />
+          <Medias theme={theme} isPhone={isPhone} setCursor={setCursor} />
+        </ScrollControls>
+        <Lights />
+      </Suspense>
     </MotionCanvas>
   );
 };

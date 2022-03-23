@@ -15,7 +15,7 @@ const uad = navigator.userAgentData;
 const App = () => {
   useEffect(() => {
     const sendAnalytics = async () => {
-      fetch("https://romain-legall.fr/api/analytics/overall", {
+      fetch("http://localhost:5000/api/analytics/overall", {
         method: "POST",
         headers: {
           Accept: "application/json",

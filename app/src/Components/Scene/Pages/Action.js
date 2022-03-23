@@ -1,5 +1,5 @@
 import { RoundedBox, Scroll, Sphere, Text, Torus } from "@react-three/drei";
-import { motion } from "framer-motion/three";
+import { motion } from "framer-motion-3d";
 import RotatingCube from "../Cubes/RotatingCube";
 import {
   DarkRoyalBlueMaterial,
