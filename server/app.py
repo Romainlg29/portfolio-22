@@ -1,11 +1,16 @@
 # Imports
 from datetime import datetime, timedelta
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, Response, json
 #from flask_cors import CORS
 import hashlib
 import mariadb
 from dotenv import load_dotenv
 from Utils import connectToDatabase
+#import profanity_check
+
+# LATER
+# https://github.com/vzhou842/profanity-check
+#
 
 
 # Starting
@@ -32,7 +37,8 @@ def overall_analytics():
     req = request.get_json()
 
     # Anonymise the user's ip
-    hash = hashlib.sha256(request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
+    hash = hashlib.sha256(
+        request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
 
     print(f'User comes from {req["from"]}')
 
@@ -46,9 +52,9 @@ def overall_analytics():
         alreadyExists = True if c[0] == 1 else False
 
     if alreadyExists:
-        
+
         print("This user already exists!")
-        
+
         # Get the id
         id = 0
         db.execute(
@@ -63,7 +69,8 @@ def overall_analytics():
 
         olderThan = True if db.rowcount == 0 else False
 
-        print(f'The last log from {id} is {"older" if olderThan else "newer"} than 5 minutes!')
+        print(
+            f'The last log from {id} is {"older" if olderThan else "newer"} than 5 minutes!')
 
         if olderThan:
             mobile = 1 if req['mobile'] == True else 0
@@ -106,7 +113,8 @@ def posts_analytics():
         return ''
 
     # Anonymise the user's ip
-    hash = hashlib.sha256(request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
+    hash = hashlib.sha256(
+        request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
 
     # Check if this hash already exists
     id = 0
@@ -150,6 +158,70 @@ def posts_analytics():
         print("Connection closed!")
         conn.close()
         return ''
+
+
+@app.route("/api/post", methods=['POST'])
+def post_comment():
+    req = request.get_json()
+
+    # If no data from post, it'll return nothing
+    if req['post'] == None:
+        return Response(json.dumps({'result': False}), status=424, mimetype='application/json')
+
+    if req['comment'] == None:
+        return Response(json.dumps({'result': False}), status=424, mimetype='application/json')
+
+    # Not needed with React as JSX handle
+    #comment = html.escape(req['comment'])
+    comment = req['comment']
+
+    #if profanity_check.predict_prob([comment]) > .8:
+    #    return Response(json.dumps({'result': False, 'reason': 'Sentences aren\'t correct!'}), status=200, mimetype='application/json')
+
+    # Connect to DB and get post data
+    conn, db = connectToDatabase(mariadb)
+
+    try:
+        db.execute(
+            "INSERT INTO posts_comments(post, comment, period) VALUES(?, ?, ?)", (req['post'], comment, datetime.now() + timedelta(hours=1)))
+
+        conn.commit()
+        conn.close()
+    except:
+        return Response(json.dumps({'result': False}), status=424, mimetype='application/json')
+
+    return Response(json.dumps({'result': True}), status=200, mimetype='application/json')
+
+
+@app.route("/api/post", methods=['GET'])
+def get_comments():
+
+    post = request.args.get('post', type=int)
+
+    # If no data from post, it'll return nothing
+    if post == None:
+        return ''
+
+    # Connect to DB and get post data
+    conn, db = connectToDatabase(mariadb)
+
+    # Our list of comments
+    l = []
+
+    try:
+        db.execute(
+            "SELECT comment, period FROM posts_comments WHERE post = ? ORDER BY period;", (post,))
+
+        for e in db:
+            l.append({'comment': e[0], 'period': e[1]})
+
+        conn.commit()
+        conn.close()
+
+    except BaseException:
+        return ''
+
+    return Response(json.dumps(l), status=200, mimetype='application/json')
 
 
 if __name__ == '__main__':

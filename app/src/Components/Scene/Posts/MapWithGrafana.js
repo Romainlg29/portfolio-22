@@ -5,6 +5,7 @@ import ParagraphImp from "./Presenter/ParagraphImp";
 import InformationToast from "./Presenter/InformationToast";
 import { useEffect, useRef, useState } from "react";
 import PostWrapper from "./Presenter/PostWrapper";
+import CommentWrapper from "./Presenter/CommentWrapper";
 
 const MapWithGrafana = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
@@ -103,6 +104,8 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
           />
 
           <Paragraph>That's it !</Paragraph>
+
+          <CommentWrapper id={id} />
         </div>
       </div>
     </PostWrapper>

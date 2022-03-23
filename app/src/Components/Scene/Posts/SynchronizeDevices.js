@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import PostWrapper from "./Presenter/PostWrapper";
 import PostHeader from "./PostHeader";
 import InformationToast from "./Presenter/InformationToast";
+import CommentWrapper from "./Presenter/CommentWrapper";
 
 const SynchronizeDevices = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
@@ -257,6 +258,8 @@ const SynchronizeDevices = ({ title, date, id, isPhone }) => {
             (Ex. Application Autostart on Kali Linux, Task Planner on Windows
             10).
           </p>
+
+          <CommentWrapper id={id} />
         </div>
       </div>
     </PostWrapper>

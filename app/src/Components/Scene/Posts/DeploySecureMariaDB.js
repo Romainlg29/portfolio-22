@@ -7,6 +7,7 @@ import ParagraphImp from "./Presenter/ParagraphImp";
 import InformationToast from "./Presenter/InformationToast";
 import { useEffect, useRef, useState } from "react";
 import PostWrapper from "./Presenter/PostWrapper";
+import CommentWrapper from "./Presenter/CommentWrapper";
 
 const MonitorContainers = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
@@ -142,6 +143,8 @@ const MonitorContainers = ({ title, date, id, isPhone }) => {
           <Paragraph>
             Finally, you can run your stack. All should be working!
           </Paragraph>
+
+          <CommentWrapper id={id} />
         </div>
       </div>
     </PostWrapper>

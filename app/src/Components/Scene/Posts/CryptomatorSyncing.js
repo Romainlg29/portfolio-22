@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import PostHeader from "./PostHeader";
 import { useEffect, useRef, useState } from "react";
 import PostWrapper from "./Presenter/PostWrapper";
+import CommentWrapper from "./Presenter/CommentWrapper";
 
 const CryptomatorSyncing = ({ title, date, id, isPhone }) => {
   const docRef = useRef(null);
@@ -114,6 +115,8 @@ const CryptomatorSyncing = ({ title, date, id, isPhone }) => {
             </span>{" "}
             Don’t forget to lock it when you’re away !
           </p>
+
+          <CommentWrapper id={id} />
         </div>
       </div>
     </PostWrapper>

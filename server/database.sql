@@ -26,3 +26,10 @@ CREATE TABLE posts_logs (
     referrer VARCHAR(255),
     PRIMARY KEY (id)
 );
+CREATE TABLE posts_comments (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    post INT UNSIGNED REFERENCES posts(id),
+    comment TEXT,
+    period DATETIME NOT NULL,
+    PRIMARY KEY (id)
+);

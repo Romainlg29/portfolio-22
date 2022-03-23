@@ -7,6 +7,7 @@ import ParagraphImp from "./Presenter/ParagraphImp";
 import InformationToast from "./Presenter/InformationToast";
 import { useEffect, useRef, useState } from "react";
 import PostWrapper from "./Presenter/PostWrapper";
+import CommentWrapper from "./Presenter/CommentWrapper";
 
 const StatsWithMysql = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
@@ -152,6 +153,8 @@ const StatsWithMysql = ({ title, date, id, isPhone }) => {
             You're now able to create some fabulous panels while getting stats
             of everything!
           </Paragraph>
+
+          <CommentWrapper id={id} />
         </div>
       </div>
     </PostWrapper>

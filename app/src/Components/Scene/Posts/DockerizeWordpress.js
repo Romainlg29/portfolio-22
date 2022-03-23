@@ -4,6 +4,7 @@ import PostWrapper from "./Presenter/PostWrapper";
 import PostHeader from "./PostHeader";
 import InformationToast from "./Presenter/InformationToast";
 import ParagraphImp from "./Presenter/ParagraphImp";
+import CommentWrapper from "./Presenter/CommentWrapper";
 
 const DockerizeWordpress = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
@@ -365,6 +366,8 @@ const DockerizeWordpress = ({ title, date, id, isPhone }) => {
             Finally, run your container. You should be able to request your
             website.
           </p>
+
+          <CommentWrapper id={id} />
         </div>
       </div>
     </PostWrapper>
