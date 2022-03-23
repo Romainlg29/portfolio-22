@@ -10,6 +10,7 @@ import { motion } from "framer-motion-3d";
 import { RoughMaterialRoyalBlue } from "../Materials";
 import posts from "../../../Assets/Posts.json";
 import { useRef, memo } from "react";
+import { history } from "../../Routes/History";
 
 const PostsPresenter = ({ setCursor, theme, isPhone }) => {
   const Posts = JSON.parse(JSON.stringify(posts));
@@ -23,7 +24,7 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
         transition={{ type: "spring", bounce: 0.3, duration: 1 }}
         onPointerOver={() => setCursor(true)}
         onPointerOut={() => setCursor(false)}
-        onClick={() => window.appHistory.push("/")}
+        onClick={() => history.push("/")}
       >
         <Text
           scale={1.5}
@@ -58,7 +59,7 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
                 }.png`}
                 imageScale={0.7}
                 setCursor={setCursor}
-                onClick={() => window.appHistory.push(`/posts${p.url}`)}
+                onClick={() => history.push(`/posts${p.url}`)}
               />
             );
           })}

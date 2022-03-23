@@ -5,6 +5,8 @@ import RotatingCube from "../Cubes/RotatingCube";
 import { motion } from "framer-motion-3d";
 import posts from "../../../Assets/Posts.json";
 
+import { history } from "../../Routes/History";
+
 const Four = ({ isPhone, theme, setCursor }) => {
   const Posts = JSON.parse(JSON.stringify(posts));
 
@@ -24,14 +26,16 @@ const Four = ({ isPhone, theme, setCursor }) => {
           Posts.slice(0, 2).map((e, k) => {
             return (
               <GlassPanel
-              key={`post_${k}`}
+                key={`post_${k}`}
                 position={[0, k * -2.5, 0]}
-                texture={`${
-                  process.env.PUBLIC_URL + e.assets
-                }/header${theme ? "" : "_dark"}.png`}
+                texture={`${process.env.PUBLIC_URL + e.assets}/header${
+                  theme ? "" : "_dark"
+                }.png`}
                 imageScale={0.7}
                 setCursor={setCursor}
-                onClick={() => window.appHistory.push(`/posts${e.url}`)}
+                onClick={() => {
+                  history.push(`/posts${e.url}`);
+                }}
               />
             );
           })}
@@ -66,7 +70,7 @@ const Four = ({ isPhone, theme, setCursor }) => {
           transition={{ type: "spring", bounce: 0.3, duration: 1 }}
           onPointerOver={() => setCursor(true)}
           onPointerOut={() => setCursor(false)}
-          onClick={() => window.appHistory.push("/posts")}
+          onClick={() => history.push("/posts")}
         >
           <Text
             scale={1}

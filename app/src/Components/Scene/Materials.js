@@ -23,18 +23,6 @@ export const DarkRoyalBlueMaterial = new MeshStandardMaterial({
 });
 
 // Mandatory to get the wanted color
-/*export const LightRoyalBlueMaterial = () => {
-  return (
-    <MeshDistortMaterial
-      color={"royalblue"}
-      speed={0}
-      distort={0}
-      roughness={0}
-      metalness={0.05}
-    />
-  );
-};*/
-
 export const LightRoyalBlueMaterial = () => {
   return (
     <MeshPhysicalMaterial

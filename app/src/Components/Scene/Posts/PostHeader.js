@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { history } from "../../Routes/History";
 
 const PostHeader = ({ title, date, id }) => {
   useEffect(() => {
@@ -23,7 +24,7 @@ const PostHeader = ({ title, date, id }) => {
     <div className="w-screen flex flex-col justify-center items-center p-2">
       <motion.div
         className="flex justify-center items-center px-2 py-1 rounded-3xl shadow shadow-blue-200 bg-blue-100  hover:shadow-blue-300 cursor-pointer transition-all"
-        onClick={() => window.appHistory.push("/posts")}
+        onClick={() => history.push("/posts")}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.7 }}
