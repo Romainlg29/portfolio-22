@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { Suspense, lazy, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useLocation, Switch, Route, Routes } from "react-router-dom";
+import { useLocation, Route, Routes } from "react-router-dom";
 import Seo from "./Components/Utils/Seo";
 import SuspenseScreen from "./Components/Utils/SuspenseScreen";
 
@@ -15,7 +15,7 @@ const uad = navigator.userAgentData;
 const App = () => {
   useEffect(() => {
     const sendAnalytics = async () => {
-      fetch("http://localhost:5000/api/analytics/overall", {
+      fetch("https://romain-legall.fr/api/analytics/overall", {
         method: "POST",
         headers: {
           Accept: "application/json",
