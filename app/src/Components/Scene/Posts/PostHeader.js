@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { history } from "../../Routes/History";
 
 const PostHeader = ({ title, date, id }) => {

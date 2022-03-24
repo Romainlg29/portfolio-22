@@ -2,7 +2,7 @@ import PostsLay from "../Layout/PostsLay";
 import posts from "../../Assets/Posts.json";
 import Seo from "../Utils/Seo";
 
-import { Switch, Route, useLocation, Routes } from "react-router-dom";
+import { Route, useLocation, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import SuspenseScreen from "../Utils/SuspenseScreen";
 

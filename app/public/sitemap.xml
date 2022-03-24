@@ -51,4 +51,9 @@
         <changefreq>monthly</changefreq>
         <priority>.5</priority>
     </url>
+    <url>
+        <loc>https://romain-legall.fr/posts/handle-react-router-v6-with-react-18-and-react-three-fiber</loc>
+        <changefreq>monthly</changefreq>
+        <priority>.5</priority>
+    </url>
 </urlset>
