@@ -1,5 +1,15 @@
 [
   {
+    "id": 10,
+    "title": "Deploy your NextJS App to Docker within 5 minutes!",
+    "date": "March 26th 2022",
+    "url": "/deploy-next-js-app-to-docker",
+    "component": "DeployNextJS.js",
+    "assets": "/Assets/Blog/Deploy-NextJS",
+    "description": "NextJS allow you to deploy React apps with improvements like SSR very easily. Today, we're going to deploy one within 5 minutes!",
+    "keywords": "react, nextjs, docker, ssr, deploy, 5 minutes, app, docker-compose, dockerfile, nodejs"
+  },
+  {
     "id": 9,
     "title": "Handle React Router V6 with React 18 and React Three Fiber.",
     "date": "March 24th 2022",

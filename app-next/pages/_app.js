@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     const uad = navigator.userAgentData;
 
     const sendAnalytics = async () => {
-      fetch("https://romain-legall.fr/api/analytics/overall", {
+      fetch("http://localhost:5000/api/analytics/overall", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -27,14 +27,6 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <Component {...pageProps} />
     </>
   );

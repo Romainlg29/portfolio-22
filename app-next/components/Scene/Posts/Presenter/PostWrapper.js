@@ -2,15 +2,14 @@ import { Scroll, ScrollControls, Preload } from "@react-three/drei";
 import Lights from "../../Lights";
 import { Canvas } from "@react-three/fiber";
 import RandomMesh from "../../../Utils/RandomMesh";
-import { Suspense } from "react";
 
 const PostWrapper = ({ pages = 1, children, isPhone }) => {
   return (
     <>
       {
-        // Render twice for SEO purpose, otherwise it'll not render the content
+        // Render twice for SEO purpose, otherwise it'll not render the content when robots crawl
       }
-      <div className="hidden">{children}</div>
+      <div className={"hidden"}>{children}</div>
       <Canvas
         colorManagement
         dpr={[1, 2]}
@@ -22,7 +21,7 @@ const PostWrapper = ({ pages = 1, children, isPhone }) => {
         }}
       >
         <Preload all />
-        <ScrollControls pages={pages} damping={4} distance={2}>
+        <ScrollControls pages={pages} damping={4} distance={1}>
           <Scroll html>{children}</Scroll>
           <Scroll>
             {!isPhone &&

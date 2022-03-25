@@ -1,5 +1,5 @@
 const CodeParagraph = ({ tab, children }) => {
-  const tabs = tab ? Array(tab).fill(" ") : null;
+  const tabs = tab ? Array(tab * 2).fill(" ") : null;
 
   return (
     <p>

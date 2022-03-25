@@ -24,7 +24,7 @@ export const DarkRoyalBlueMaterial = new MeshStandardMaterial({
 // Mandatory to get the wanted color
 export const LightRoyalBlueMaterial = () => {
   return (
-    <MeshPhysicalMaterial
+    <meshPhysicalMaterial
       color={"royalblue"}
       speed={0}
       distort={0}
@@ -50,7 +50,7 @@ export const GlassAlternateMaterial = () => {
       roughness={0}
       clearcoat={1}
       clearcoatRoughness={1}
-      transmission={.99}
+      transmission={0.99}
       ior={2}
       envMapIntensity={50}
       color={"#bababa"}
