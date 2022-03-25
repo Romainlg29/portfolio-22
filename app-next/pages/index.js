@@ -1,4 +1,4 @@
-import Home from "../Components/Routes/Home";
+import Home from "../components/Routes/Home";
 import Seo from "../components/Utils/Seo";
 import { useMediaQuery } from "react-responsive";
 
