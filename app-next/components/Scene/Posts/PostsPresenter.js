@@ -59,7 +59,7 @@ const PostsPresenter = ({ setCursor, theme, isPhone }) => {
                 }.png`}
                 imageScale={0.7}
                 setCursor={setCursor}
-                onClick={() => Router.push(`/posts${p.url}`)}
+                onClick={() => Router.push(`/posts/${p.url}`)}
               />
             );
           })}
