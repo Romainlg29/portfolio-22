@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+p,
+input,
+textarea,
+button {
+  font-family: "Comfortaa", cursive;
+}
+
+body {
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #ffffff00;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: #eee;
+  cursor: move;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #dfdfdf;
+}

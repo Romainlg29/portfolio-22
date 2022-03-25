@@ -1,7 +1,7 @@
 # Imports
 from datetime import datetime, timedelta
 from flask import Flask, request, redirect, Response, json
-#from flask_cors import CORS
+from flask_cors import CORS
 import hashlib
 import mariadb
 from dotenv import load_dotenv
@@ -13,7 +13,7 @@ load_dotenv()
 
 # Flask
 app = Flask(__name__)
-#CORS(app)  # DEV ONLY
+CORS(app)  # DEV ONLY
 
 
 @app.route("/api/", methods=['POST', 'GET'])
