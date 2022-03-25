@@ -1,5 +1,6 @@
 **/node_modules
 **/.env
+app-next/.next
 server/env
 app/build
 .vscode/
