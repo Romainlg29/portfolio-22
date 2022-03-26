@@ -5,7 +5,7 @@ import Router from "next/router";
 const PostHeader = ({ title, date, id }) => {
   useEffect(() => {
     const sendAnalytics = async () => {
-      fetch("http://localhost:5000/api/analytics/post", {
+      fetch("https://romain-legall.fr/api/analytics/post", {
         method: "POST",
         headers: {
           Accept: "application/json",

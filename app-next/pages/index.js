@@ -19,7 +19,6 @@ const App = () => {
               "portfolio, docker, grafana, it, mysql, docker swarm, mariadb, internship, syncing, cryptomator, 3D, reactjs, python, react three fiber",
           },
         ]}
-        keywords={post.keywords}
         openGraph={{
           type: "website",
           locale: "en_US",

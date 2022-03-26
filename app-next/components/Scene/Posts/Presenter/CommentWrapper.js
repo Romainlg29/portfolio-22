@@ -6,7 +6,7 @@ const CommentWrapper = ({ id }) => {
 
   const send = async () => {
     if (comment === "") return;
-    const com = await fetch("http://localhost:5000/api/post", {
+    const com = await fetch("https://romain-legall.fr/api/post", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -26,7 +26,7 @@ const CommentWrapper = ({ id }) => {
 
   useEffect(() => {
     const getComments = async () => {
-      const a = await fetch(`http://localhost:5000/api/post?post=${id}`);
+      const a = await fetch(`https://romain-legall.fr/api/post?post=${id}`);
       setComments(await a.json());
     };
     getComments();
