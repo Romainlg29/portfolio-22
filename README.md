@@ -8,7 +8,7 @@ Here is my portfolio !
 
 ## Made with
 
-- ReactJS
+- ReactJS / NextJS
 - TailwindCSS
 - React Three Fiber / ThreeJS
 - Flask / Python

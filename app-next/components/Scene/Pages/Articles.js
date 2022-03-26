@@ -33,7 +33,7 @@ const Four = ({ isPhone, theme, setCursor }) => {
                 imageScale={0.7}
                 setCursor={setCursor}
                 onClick={() => {
-                  Router.push(`/posts${e.url}`);
+                  Router.push(`/posts/${e.url}`);
                 }}
               />
             );
