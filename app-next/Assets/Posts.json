@@ -1,8 +1,18 @@
 [
   {
+    "id": 11,
+    "title": "Automatically scale all your docker services!",
+    "date": "March 28th, 2022",
+    "url": "automatically-scale-your-docker-services",
+    "component": "ScaleDockerServices.js",
+    "assets": "/Assets/Blog/Scale-Docker-Services",
+    "description": "Docker provides great functionalities, however, an automated way to scale your services is not included. That's why I'm going to share you how to do it. Within a couple of minutes!",
+    "keywords": "docker, docker-compose, docker swarm, services, docker services, swarm, scaling, python, easy, fast"
+  },
+  {
     "id": 10,
     "title": "Deploy your NextJS App to Docker within 5 minutes!",
-    "date": "March 26th 2022",
+    "date": "March 26th, 2022",
     "url": "deploy-next-js-app-to-docker",
     "component": "DeployNextJS.js",
     "assets": "/Assets/Blog/Deploy-NextJS",
@@ -12,7 +22,7 @@
   {
     "id": 9,
     "title": "Handle React Router V6 with React 18 and React Three Fiber.",
-    "date": "March 24th 2022",
+    "date": "March 24th, 2022",
     "url": "handle-react-router-v6-with-react-18-and-react-three-fiber",
     "component": "HandleReactRouter.js",
     "assets": "/Assets/Blog/Handle-React-Router",
@@ -22,7 +32,7 @@
   {
     "id": 8,
     "title": "Create a map with Grafana",
-    "date": "March 22th 2022",
+    "date": "March 22th, 2022",
     "url": "map-with-grafana",
     "component": "MapWithGrafana.js",
     "assets": "/Assets/Blog/Map-Grafana",
@@ -32,7 +42,7 @@
   {
     "id": 7,
     "title": "Use MySQL as a datasource for your Grafana!",
-    "date": "March 20th 2022",
+    "date": "March 20th, 2022",
     "url": "stats-with-mysql",
     "component": "StatsWithMysql.js",
     "assets": "/Assets/Blog/Stats-Mysql",
@@ -42,7 +52,7 @@
   {
     "id": 6,
     "title": "Deploy a secure MariaDB on Docker Swarm!",
-    "date": "February 09th 2022",
+    "date": "February 09th, 2022",
     "url": "deploy-mariadb",
     "component": "DeploySecureMariaDB.js",
     "assets": "/Assets/Blog/Deploy-MariaDB",
@@ -52,7 +62,7 @@
   {
     "id": 5,
     "title": "Monitor your server with Prometheus and Grafana!",
-    "date": "November 29th 2021",
+    "date": "November 29th, 2021",
     "url": "monitor-with-prometheus-and-grafana",
     "component": "MonitorContainers.js",
     "assets": "/Assets/Blog/Monitoring-Docker",
@@ -62,7 +72,7 @@
   {
     "id": 4,
     "title": "Dockerize Wordpress!",
-    "date": "October 26th 2021",
+    "date": "October 26th, 2021",
     "url": "dockerize-wordpress",
     "component": "DockerizeWordpress.js",
     "assets": "/Assets/Blog/Dockerize-Wordpress",
@@ -72,7 +82,7 @@
   {
     "id": 3,
     "title": "Internship at Autoliv!",
-    "date": "June 29th 2021",
+    "date": "June 29th, 2021",
     "url": "internship-at-autoliv",
     "component": "InternshipAtAutoliv.js",
     "assets": "/Assets/Blog/Autoliv",
@@ -82,7 +92,7 @@
   {
     "id": 2,
     "title": "Enhance your syncing security!",
-    "date": "January 5th 2021",
+    "date": "January 5th, 2021",
     "url": "enhance-your-syncing-security",
     "component": "CryptomatorSyncing.js",
     "assets": "/Assets/Blog/Cryptomator",
@@ -92,7 +102,7 @@
   {
     "id": 1,
     "title": "How to synchronize your devices easily!",
-    "date": "January 5th 2021",
+    "date": "January 5th, 2021",
     "url": "how-to-synchronize-your-devices-easily",
     "component": "SynchronizeDevices.js",
     "assets": "/Assets/Blog/Syncthing",

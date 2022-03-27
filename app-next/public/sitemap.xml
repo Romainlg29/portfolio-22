@@ -61,4 +61,9 @@
         <changefreq>monthly</changefreq>
         <priority>.9</priority>
     </url>
+    <url>
+        <loc>https://romain-legall.fr/posts/automatically-scale-your-docker-services</loc>
+        <changefreq>monthly</changefreq>
+        <priority>.9</priority>
+    </url>
 </urlset>
