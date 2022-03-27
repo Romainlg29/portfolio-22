@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import RandomMesh from "../../../Utils/RandomMesh";
 
 const PostWrapper = ({ pages = 1, children, isPhone }) => {
+
   return (
     <>
       {
