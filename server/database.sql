@@ -2,7 +2,7 @@ CREATE TABLE unique_visits_logs (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     user VARCHAR(64) CHARACTER SET latin1 COLLATE latin1_general_CI NOT NULL,
     period DATETIME NOT NULL,
-    lang VARCHAR(5) NOT NULL,
+    lang VARCHAR(2) NOT NULL,
     PRIMARY KEY (id)
 );
 CREATE TABLE visits_logs (

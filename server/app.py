@@ -1,11 +1,12 @@
 # Imports
 from datetime import datetime, timedelta
 from flask import Flask, request, redirect, Response, json
-from flask_cors import CORS
+#from flask_cors import CORS
 import hashlib
 import mariadb
 from dotenv import load_dotenv
 from Utils import connectToDatabase
+import IP2Location
 
 
 # Starting
@@ -13,7 +14,7 @@ load_dotenv()
 
 # Flask
 app = Flask(__name__)
-CORS(app)  # DEV ONLY
+#CORS(app)  # DEV ONLY
 
 
 @app.route("/api/", methods=['POST', 'GET'])
@@ -34,6 +35,10 @@ def overall_analytics():
     # Anonymise the user's ip
     hash = hashlib.sha256(
         request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
+
+    locations = IP2Location.IP2Location("./ips_blocks.bin")
+    location = locations.get_country_short(request.environ['HTTP_X_FORWARDED_FOR'])
+    locations.close()
 
     print(f'User comes from {req["from"]}')
 
@@ -80,7 +85,7 @@ def overall_analytics():
     else:
         # Insert the new user
         db.execute(
-            "INSERT INTO unique_visits_logs (user, lang, period) VALUES (?, ?, ?)", (hash, req['lang'], datetime.now() + timedelta(hours=1)))
+            "INSERT INTO unique_visits_logs (user, lang, period) VALUES (?, ?, ?)", (hash, location if location else '', datetime.now() + timedelta(hours=1)))
 
         print(f'New log from a new user : {db.lastrowid}')
 
