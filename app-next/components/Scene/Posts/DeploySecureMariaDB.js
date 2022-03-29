@@ -90,10 +90,9 @@ const MonitorContainers = ({ title, date, id, isPhone }) => {
             Secondly, edit the previously created docker-compose file and paste
             the following code.
           </Paragraph>
-          <CodeBlock>
+          <CodeBlock title={"docker-compose.yml"} lang={"yaml"}>
             <CodeParagraph>version: "3.3"</CodeParagraph>
             <br />
-            <CodeParagraph></CodeParagraph>
             <CodeParagraph>services:</CodeParagraph>
             <CodeParagraph tab={2}>mariadb:</CodeParagraph>
             <CodeParagraph tab={4}>image: mariadb</CodeParagraph>

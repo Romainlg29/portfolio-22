@@ -57,7 +57,7 @@ const DeployNextJS = ({ title, date, id, isPhone }) => {
             Inside your NextJS project, add the following Dockerfile.
           </Paragraph>
 
-          <CodeBlock title={"Dockerfile"}>
+          <CodeBlock title={"Dockerfile"} lang={'bash'}>
             <CodeParagraph>
               # Here we're using alpine to get a small image
             </CodeParagraph>
@@ -105,7 +105,7 @@ const DeployNextJS = ({ title, date, id, isPhone }) => {
 
           <Paragraph>Let's create a compose file to deploy your app.</Paragraph>
 
-          <CodeBlock title={"docker-compose.yml"}>
+          <CodeBlock title={"docker-compose.yml"} lang={'yaml'}>
             <CodeParagraph>version: '3.3'</CodeParagraph>
             <br />
             <CodeParagraph>services:</CodeParagraph>

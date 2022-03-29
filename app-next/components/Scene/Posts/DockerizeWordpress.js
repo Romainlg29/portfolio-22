@@ -5,6 +5,8 @@ import PostHeader from "./PostHeader";
 import InformationToast from "./Presenter/InformationToast";
 import ParagraphImp from "./Presenter/ParagraphImp";
 import CommentWrapper from "./Presenter/CommentWrapper";
+import CodeBlock from "./Presenter/CodeBlock";
+import CodeParagraph from "./Presenter/CodeParagraph";
 
 const DockerizeWordpress = ({ title, date, id, isPhone }) => {
   const [infoText, setInfoText] = useState("");
@@ -70,66 +72,61 @@ const DockerizeWordpress = ({ title, date, id, isPhone }) => {
             </ParagraphImp>{" "}
             and copy and paste the following configuration.
           </p>
-          <div
-            className={
-              "mb-2 text-gray-700 leading-8 p-2 px-4 bg-blue-100 rounded-lg overflow-x-auto"
-            }
-          >
-            <p>version: "3.3"</p>
-            <p>services:</p>
-            <p>&nbsp;&nbsp;traefik: #Here we're defining our service name</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;command: --providers.docker #Make Traefik
-              able to detect our docker
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;image: traefik:v2.5 #Get Traefik image
-              from Docker Hub
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;ports: #Open HTTP and HTTPS</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "443:443"</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "80:80"</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;restart: always</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;networks: #Apply a network to our
-              container
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- netw</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;volumes: #Create needed volumes</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              /var/run/docker.sock:/var/run/docker.sock #Same as the command
+
+          <CodeBlock title={"traefik-compose.yml"} lang={"yaml"}>
+            <CodeParagraph>version: "3.3"</CodeParagraph>
+            <CodeParagraph>services:</CodeParagraph>
+            <CodeParagraph tab={2}>
+              traefik: #Here we're defining our service name
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              command: --providers.docker #Make Traefik able to detect our
+              docker
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              image: traefik:v2.5 #Get Traefik image from Docker Hub
+            </CodeParagraph>
+            <CodeParagraph tab={4}>ports: #Open HTTP and HTTPS</CodeParagraph>
+            <CodeParagraph tab={6}>- "443:443"</CodeParagraph>
+            <CodeParagraph tab={6}>- "80:80"</CodeParagraph>
+            <CodeParagraph tab={4}>restart: always</CodeParagraph>
+            <CodeParagraph tab={4}>
+              networks: #Apply a network to our container
+            </CodeParagraph>
+            <CodeParagraph tab={6}>- netw</CodeParagraph>
+            <CodeParagraph tab={4}>
+              volumes: #Create needed volumes
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              - /var/run/docker.sock:/var/run/docker.sock #Same as the command
               line
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              /etc/docker/traefik/traefik.toml:/etc/traefik/traefik.toml #Link a
-              local traefik.toml to the container file
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              /etc/docker/vols/traefik/acme.json:/acme.json #Same as above, this
-              will handle Let's Encrypt certs
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;labels: #Traefik configuration label</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              - /etc/docker/traefik/traefik.toml:/etc/traefik/traefik.toml #Link
+              a local traefik.toml to the container file
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              - /etc/docker/vols/traefik/acme.json:/acme.json #Same as above,
+              this will handle Let's Encrypt certs
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              labels: #Traefik configuration label
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
               "traefik.docker.network=netw" #Define the used network
-            </p>
-            <p>networks: #Create our network</p>
-            <p>&nbsp;&nbsp;netw:</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;driver: bridge</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;ipam:</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config:</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- subnet:
-              192.168.4.0/24 #We must define a subnet, it'll be mandatory for
-              mysql
-            </p>
-          </div>
-          <p className={"mb-6 text-lg text-gray-700 text-center leading-8"}>
-            Traefik - docker-compose.yml
-          </p>
+            </CodeParagraph>
+            <br />
+            <CodeParagraph>networks: #Create our network</CodeParagraph>
+            <CodeParagraph tab={2}>netw:</CodeParagraph>
+            <CodeParagraph tab={4}>driver: bridge</CodeParagraph>
+            <CodeParagraph tab={6}>ipam:</CodeParagraph>
+            <CodeParagraph tab={8}>config:</CodeParagraph>
+            <CodeParagraph tab={10}>
+              - subnet: 192.168.4.0/24 #We must define a subnet, it'll be
+              mandatory for mysql
+            </CodeParagraph>
+          </CodeBlock>
+
           <p className={"mb-6 text-xl text-gray-700 text-center leading-8"}>
             In addition, run{" "}
             <ParagraphImp setText={setInfoText}>
@@ -148,56 +145,51 @@ const DockerizeWordpress = ({ title, date, id, isPhone }) => {
             exist, create them.
           </p>
 
-          <div
-            className={
-              "mb-2 text-gray-700 leading-8 p-2 px-4 bg-blue-100 rounded-lg overflow-x-auto"
-            }
-          >
-            <p>[entryPoints]</p>
-            <p>&nbsp;&nbsp;[entryPoints.web]</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;address = ":80"</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;[entryPoints.web.http]</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[entryPoints.web.http.redirections]
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[entryPoints.web.http.redirections.entryPoint]
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to =
-              "websecure"
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scheme
-              = "https"
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permanent
-              = true
-            </p>
-            <p>&nbsp;&nbsp;[entryPoints.websecure]</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;address = ":443"</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;[entryPoints.web.http.tls]</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;certResolver = "default"</p>
-            <p>[providers]</p>
-            <p>&nbsp;&nbsp;[providers.docker]</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;watch = true</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;exposedByDefault = false</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;network = "netw"</p>
+          <CodeBlock title={"traefik.toml"} lang={"yaml"}>
+            <CodeParagraph>[entryPoints]</CodeParagraph>
+            <CodeParagraph tab={2}>[entryPoints.web]</CodeParagraph>
+            <CodeParagraph tab={4}>address = ":80"</CodeParagraph>
+            <CodeParagraph tab={4}>[entryPoints.web.http]</CodeParagraph>
+            <CodeParagraph tab={6}>
+              [entryPoints.web.http.redirections]
+            </CodeParagraph>
+            <CodeParagraph tab={8}>
+              [entryPoints.web.http.redirections.entryPoint]
+            </CodeParagraph>
+            <CodeParagraph tab={10}>to = "websecure"</CodeParagraph>
+            <CodeParagraph tab={10}>scheme = "https"</CodeParagraph>
+            <CodeParagraph tab={10}>permanent = true</CodeParagraph>
+            <CodeParagraph tab={2}>[entryPoints.websecure]</CodeParagraph>
+            <CodeParagraph tab={4}>address = ":443"</CodeParagraph>
+            <CodeParagraph tab={4}>[entryPoints.web.http.tls]</CodeParagraph>
+            <CodeParagraph tab={6}>certResolver = "default"</CodeParagraph>
 
-            <p>[certificatesResolvers]</p>
-            <p>&nbsp;&nbsp;[certificatesResolvers.default]</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;[certificatesResolvers.default.acme]</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email = "YOUR_EMAIL"</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;storage = "./acme.json"</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;caServer =
-              "https://acme-v01.api.letsencrypt.org/directory"
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;[certificatesResolvers.default.acme.tlsChallenge]
-            </p>
-          </div>
+            <br />
+
+            <CodeParagraph>[providers]</CodeParagraph>
+            <CodeParagraph tab={2}>[providers.docker]</CodeParagraph>
+            <CodeParagraph tab={4}>watch = true</CodeParagraph>
+            <CodeParagraph tab={4}>exposedByDefault = false</CodeParagraph>
+            <CodeParagraph tab={4}>network = "netw"</CodeParagraph>
+
+            <br />
+
+            <CodeParagraph>[certificatesResolvers]</CodeParagraph>
+            <CodeParagraph tab={2}>
+              [certificatesResolvers.default]
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              [certificatesResolvers.default.acme]
+            </CodeParagraph>
+            <CodeParagraph tab={6}>email = "YOUR_EMAIL"</CodeParagraph>
+            <CodeParagraph tab={6}>storage = "./acme.json"</CodeParagraph>
+            <CodeParagraph tab={6}>
+              caServer = "https://acme-v01.api.letsencrypt.org/directory"
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              [certificatesResolvers.default.acme.tlsChallenge]
+            </CodeParagraph>
+          </CodeBlock>
 
           <p className={"mb-6 text-xl text-gray-700 text-center leading-8"}>
             Now, in your Traefik's docker-compose directory, use{" "}
@@ -215,57 +207,51 @@ const DockerizeWordpress = ({ title, date, id, isPhone }) => {
             purpose, edit your docker-compose inside the mysql folder and add
             the following.
           </p>
-          <div
-            className={
-              "mb-2 text-gray-700 leading-8 p-2 px-4 bg-blue-100 rounded-lg overflow-x-auto"
-            }
-          >
-            <p>version: "3.5"</p>
-            <p>services:</p>
-            <p>&nbsp;&nbsp;db: #Here we're defining our service name</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;image: mysql:5.7 #Get MySQL image from
-              Docker Hub
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;volumes: #Create needed volumes</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              /etc/docker/vols/mysql:/var/lib/mysql
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;restart: always</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;expose: #Expose 3306</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "3306"</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;environment: #Define MySQL variables</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_ROOT_PASSWORD:
-              YOUR_ROOT_PASSWORD
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_DATABASE: DEFAULT</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_USER: YOUR_CUSTOM_USER
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_PASSWORD:
-              YOUR_CUSTOM_USER_PASSWORD
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;networks: #Link the Traefik network to our
-              container and define a static IP.
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wpnet:</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ipv4_address:
-              192.168.4.100
-            </p>
 
-            <p>networks: #Link to our Traefik network</p>
-            <p>&nbsp;&nbsp;wpnet:</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;external:</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: traefik_netw</p>
-          </div>
-          <p className={"mb-6 text-lg text-gray-700 text-center leading-8"}>
-            MySQL - docker-compose.yml
-          </p>
+          <CodeBlock title={"mysql-compose.yml"} lang={"yaml"}>
+            <CodeParagraph>version: "3.7"</CodeParagraph>
+            <CodeParagraph>services:</CodeParagraph>
+            <CodeParagraph tab={2}>db:</CodeParagraph>
+            <CodeParagraph tab={4}>
+              image: mysql:5.7 # Get MySQL image from Docker Hub
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              volumes: #Create needed volumes
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              - /etc/docker/vols/mysql:/var/lib/mysql
+            </CodeParagraph>
+            <CodeParagraph tab={4}>restart: always</CodeParagraph>
+            <CodeParagraph tab={4}>expose: #Expose 3306</CodeParagraph>
+            <CodeParagraph tab={6}>- "3306"</CodeParagraph>
+            <CodeParagraph tab={4}>
+              environment: #Define MySQL variables
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              MYSQL_ROOT_PASSWORD: YOUR_ROOT_PASSWORD
+            </CodeParagraph>
+            <CodeParagraph tab={6}>MYSQL_DATABASE: DEFAULT</CodeParagraph>
+            <CodeParagraph tab={6}>MYSQL_USER: YOUR_CUSTOM_USER</CodeParagraph>
+            <CodeParagraph tab={6}>
+              MYSQL_PASSWORD: YOUR_CUSTOM_USER_PASSWORD
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              networks: #Link the Traefik network to our container and define a
+              static IP.
+            </CodeParagraph>
+            <CodeParagraph tab={6}>wpnet:</CodeParagraph>
+            <CodeParagraph tab={8}>ipv4_address: 192.168.4.100</CodeParagraph>
+
+            <br />
+
+            <CodeParagraph>
+              networks: #Link to our Traefik network
+            </CodeParagraph>
+            <CodeParagraph tab={2}>wpnet:</CodeParagraph>
+            <CodeParagraph tab={4}>external:</CodeParagraph>
+            <CodeParagraph tab={6}>name: traefik_netw</CodeParagraph>
+          </CodeBlock>
+
           <p className={"mb-6 text-xl text-gray-700 text-center leading-8"}>
             Same as Traefik, run{" "}
             <ParagraphImp setText={setInfoText}>
@@ -278,89 +264,74 @@ const DockerizeWordpress = ({ title, date, id, isPhone }) => {
             Thirdly, we remain to do our Wordpress docker. Go into your
             docker-compose and paste the following code.
           </p>
-          <div
-            className={
-              "mb-2 text-gray-700 leading-8 p-2 px-4 bg-blue-100 rounded-lg overflow-x-auto"
-            }
-          >
-            <p>version: "3.3"</p>
-            <p>services:</p>
-            <p>&nbsp;&nbsp;wp:</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;image: wordpress:latest</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;container_name: YOUR_WP_NAME</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;volumes:</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              /etc/docker/vols/YOUR_WP_NAME:/var/www/html
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;expose: #Expose HTTP and HTTPS</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "80"</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "433"</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;restart: always</p>
 
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;environment: #Define Wordpress variables
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WORDPRESS_DB_HOST:
-              192.168.4.100:3306 #Here is our MySQL container
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WORDPRESS_DB_USER:
-              AN_USER_THAT_EXISTS_IN_MYSQL_CONTAINER
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WORDPRESS_DB_PASSWORD:
+          <CodeBlock title={"wordpress-compose.yml"} lang={"yaml"}>
+            <CodeParagraph>version: "3.7"</CodeParagraph>
+            <CodeParagraph>services:</CodeParagraph>
+            <CodeParagraph tab={2}>wp:</CodeParagraph>
+            <CodeParagraph tab={4}>image: wordpress:latest</CodeParagraph>
+            <CodeParagraph tab={4}>container_name: YOUR_WP_NAME</CodeParagraph>
+            <CodeParagraph tab={4}>volumes:</CodeParagraph>
+            <CodeParagraph tab={6}>
+              - /etc/docker/vols/YOUR_WP_NAME:/var/www/html
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              expose: #Expose HTTP and HTTPS
+            </CodeParagraph>
+            <CodeParagraph tab={6}>- "80"</CodeParagraph>
+            <CodeParagraph tab={6}>- "433"</CodeParagraph>
+            <CodeParagraph tab={4}>restart: always</CodeParagraph>
+            <CodeParagraph tab={4}>
+              environment: #Define Wordpress variables
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              WORDPRESS_DB_HOST: 192.168.4.100:3306 #Here is our MySQL container
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              WORDPRESS_DB_USER: AN_USER_THAT_EXISTS_IN_MYSQL_CONTAINER
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              WORDPRESS_DB_PASSWORD:
               PASSWORD_OF_AN_USER_THAT_EXISTS_IN_MYSQL_CONTAINER
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WORDPRESS_DB_NAME:
-              DATABASE_THAT_EXISTS_IN_YOUR_MYSQL_CONTAINER
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;networks: #Link to the Traefik network
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- wpnet</p>
-
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;labels: #Traefik labels</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              "traefik.docker.network=wpnet"
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              "traefik.backend=YOUR_WP_NAME"
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              "traefik.enable=true"
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              WORDPRESS_DB_NAME: DATABASE_THAT_EXISTS_IN_YOUR_MYSQL_CONTAINER
+            </CodeParagraph>
+            <CodeParagraph tab={4}>
+              networks: #Link to the Traefik network
+            </CodeParagraph>
+            <CodeParagraph tab={6}>- wpnet</CodeParagraph>
+            <CodeParagraph tab={4}>labels: #Traefik labels</CodeParagraph>
+            <CodeParagraph tab={6}>
+              - "traefik.docker.network=wpnet"
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              - "traefik.backend=YOUR_WP_NAME"
+            </CodeParagraph>
+            <CodeParagraph tab={6}>- "traefik.enable=true"</CodeParagraph>
+            <CodeParagraph tab={6}>
+              -
               "traefik.http.routers.YOUR_WP_NAME.rule=Host(`YOUR_DOMAIN_HERE`)"
               #Ex google.com
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              "traefik.http.routers.YOUR_WP_NAME.entrypoints=websecure"
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              "traefik.http.services.YOUR_WP_NAME.loadbalancer.server.port=80"
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
-              "traefik.port=80"
-            </p>
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              - "traefik.http.routers.YOUR_WP_NAME.entrypoints=websecure"
+            </CodeParagraph>
+            <CodeParagraph tab={6}>
+              - "traefik.http.services.YOUR_WP_NAME.loadbalancer.server.port=80"
+            </CodeParagraph>
+            <CodeParagraph tab={6}>- "traefik.port=80"</CodeParagraph>
 
-            <p>networks: #Link to our Traefik network</p>
-            <p>&nbsp;&nbsp;wpnet:</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;external:</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: traefik_netw</p>
-          </div>
-          <p className={"mb-6 text-lg text-gray-700 text-center leading-8"}>
-            Wordpress - docker-compose.yml
-          </p>
+            <br />
+
+            <CodeParagraph>
+              networks: #Link to our Traefik network
+            </CodeParagraph>
+            <CodeParagraph tab={2}>wpnet:</CodeParagraph>
+            <CodeParagraph tab={4}>external:</CodeParagraph>
+            <CodeParagraph tab={6}>name: traefik_netw</CodeParagraph>
+          </CodeBlock>
+
           <p className={"mb-6 text-xl text-gray-700 text-center leading-8"}>
             Finally, run your container. You should be able to request your
             website.

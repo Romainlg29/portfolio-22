@@ -67,7 +67,7 @@ const MonitorContainers = ({ title, date, id, isPhone }) => {
             Note: As I'm using Traefik, my containers will be inside a
             predefined network, adjust this as your use case.
           </Paragraph>
-          <CodeBlock>
+          <CodeBlock title={"docker-compose.yml"} lang={"yaml"}>
             <CodeParagraph>version: "3.3"</CodeParagraph>
             <br />
             <CodeParagraph>services:</CodeParagraph>
@@ -136,7 +136,7 @@ const MonitorContainers = ({ title, date, id, isPhone }) => {
             retrieve field.
           </Paragraph>
 
-          <CodeBlock>
+          <CodeBlock title={"docker-compose.yml"} lang={"yaml"}>
             <CodeParagraph tab={2}>node_exporter:</CodeParagraph>
             <CodeParagraph tab={4}>image: prom/node-exporter</CodeParagraph>
             <CodeParagraph tab={4}>expose:</CodeParagraph>
@@ -182,11 +182,12 @@ const MonitorContainers = ({ title, date, id, isPhone }) => {
             wrote in our docker-compose (Not beside your docker-compose). And
             copy the following.
           </Paragraph>
-          <CodeBlock>
+          <CodeBlock title={"prometheus.yml"} lang={"yaml"}>
             <CodeParagraph tab={0}>global:</CodeParagraph>
             <CodeParagraph tab={2}>
               scrape_interval: 15s #Every 15s our targets will be fetched
             </CodeParagraph>
+            <br/>
             <CodeParagraph tab={0}>scrape_configs: #Configs</CodeParagraph>
             <CodeParagraph tab={2}>
               - job_name 'prometheus' # Our first job
@@ -221,7 +222,7 @@ const MonitorContainers = ({ title, date, id, isPhone }) => {
             Finally, let's get started with Grafana! Edit and paste the
             following in your docker-compose.yml
           </Paragraph>
-          <CodeBlock>
+          <CodeBlock title={"docker-compose.yml"} lang={"yaml"}>
             <CodeParagraph tab={0}>version: "3.3"</CodeParagraph>
             <CodeParagraph tab={0}>services:</CodeParagraph>
             <CodeParagraph tab={2}>grafana: #Our service name</CodeParagraph>
@@ -270,6 +271,7 @@ const MonitorContainers = ({ title, date, id, isPhone }) => {
               - "traefik.http.services.grafana.loadbalancer.server.port=3000"
             </CodeParagraph>
             <CodeParagraph tab={8}>- "traefik.port=80"</CodeParagraph>
+            <br/>
             <CodeParagraph tab={0}>
               networks: #Retrieve our network
             </CodeParagraph>

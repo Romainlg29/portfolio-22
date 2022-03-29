@@ -81,7 +81,7 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
           <Paragraph>
             React 18 depreacated ReactDom.render(), instead you must use :
           </Paragraph>
-          <CodeBlock>
+          <CodeBlock title={"index.js"} lang={"jsx"}>
             <CodeParagraph>
               import * as ReactDOMClient from "react-dom/client";
             </CodeParagraph>
@@ -124,7 +124,7 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
             deleted in this new version. So, create a new file ThreeRouter.js
           </Paragraph>
 
-          <CodeBlock>
+          <CodeBlock title={"ThreeRouter.js"} lang={"jsx"}>
             <CodeParagraph>
               {'import { useLayoutEffect, useState } from "react";'}
             </CodeParagraph>
@@ -161,16 +161,11 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
             <CodeParagraph>{"};"}</CodeParagraph>
             <CodeParagraph>export default ThreeRouter;</CodeParagraph>
 
-            <br />
-            <ParagraphHref
-              href={
-                "https://stackoverflow.com/questions/69871987/react-router-v6-navigate-outside-of-components"
-              }
-            >
+            <CodeParagraph>
               {
                 "// FROM https://stackoverflow.com/questions/69871987/react-router-v6-navigate-outside-of-components"
               }
-            </ParagraphHref>
+            </CodeParagraph>
           </CodeBlock>
 
           <Paragraph>
@@ -178,7 +173,7 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
             History.js component.
           </Paragraph>
 
-          <CodeBlock>
+          <CodeBlock title={"History.js"} lang={"jsx"}>
             <CodeParagraph>
               {'import { createBrowserHistory } from "history";'}
             </CodeParagraph>
@@ -192,7 +187,7 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
             App component by your router.
           </Paragraph>
 
-          <CodeBlock>
+          <CodeBlock title={"index.js"} lang={"jsx"}>
             <CodeParagraph>{'import { history } from "...";'}</CodeParagraph>
             <CodeParagraph>{'import ThreeRouter from "...";'}</CodeParagraph>
             <br />
@@ -211,7 +206,7 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
             simple, use :
           </Paragraph>
 
-          <CodeBlock>
+          <CodeBlock title={"Canvas.js"} lang={"jsx"}>
             <CodeParagraph>{'import { history } from "...";'}</CodeParagraph>
             <br />
             <CodeParagraph>{"// Your event or else..."}</CodeParagraph>

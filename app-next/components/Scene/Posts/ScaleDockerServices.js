@@ -87,7 +87,7 @@ const DeployNextJS = ({ title, date, id, isPhone }) => {
             cpu_usage and replicas to the list with the service name as the key.
           </Paragraph>
 
-          <CodeBlock title={"Containers and services"}>
+          <CodeBlock title={"Containers and services"} lang={'python'}>
             <CodeParagraph>
               cList = dockerClient.containers.list()
             </CodeParagraph>
@@ -140,7 +140,7 @@ const DeployNextJS = ({ title, date, id, isPhone }) => {
             service.
           </Paragraph>
 
-          <CodeBlock title={"Scaling"}>
+          <CodeBlock title={"Scaling"} lang={'python'}>
             <CodeParagraph>for service in cgList:</CodeParagraph>
             <br />
             <CodeParagraph tab={2}>
