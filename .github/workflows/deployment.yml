@@ -1,0 +1,52 @@
+# Our workflow name
+name: Docker deployment
+
+# To specify some branch, use the following
+on:
+  push:
+    branches:
+      - deployment
+
+# Or for a global use:
+#on: [push]
+
+
+# Here, we're creating our jobs / tasks to do when a push is done
+jobs:
+
+  build:
+
+    # Using an ubuntu container
+    runs-on: ubuntu-latest
+
+    # Every steps you would need should be there
+    steps:
+
+      # Our first task is to check-out our commit
+      - uses: actions/checkout@v3
+
+      # Now let's define how we're going to achieve an automatic deployment
+      # One of the fastest way is to make our server pulls the code from Github
+      # So we've to connect to our server and make it running a script
+
+      - name: Clone and build
+        
+        # Using a specific action which enables us to remotely ssh
+        uses: appleboy/ssh-action@master
+
+        # We're passing our args
+        with:
+
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USER}}
+
+          # You can use a password instead of your private key
+          #password: ${{secrets.PASSWORD}}
+
+          key: ${{secrets.SSH}}
+
+          # If your ssh port is 22, the following line isn't mandatory
+          port: ${{secrets.PORT}}
+
+          # Finally, we're running the command
+          script: /etc/docker/scripts/build.sh
