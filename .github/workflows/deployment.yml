@@ -48,6 +48,9 @@ jobs:
           # If your ssh port is 22, the following line isn't mandatory
           port: ${{secrets.PORT}}
 
+          # if you encrypted your key with a passphrase add:
+          passphrase: ${{secrets.PASSPHRASE}}
+
           # Finally, we're running the command
           script: /etc/docker/scripts/build.sh
-          
+
