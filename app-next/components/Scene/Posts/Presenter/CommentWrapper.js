@@ -35,7 +35,7 @@ const CommentWrapper = ({ id }) => {
   return (
     <div className="w-full mt-24 flex flex-col items-center justify-center">
       <p className="text-xl text-gray-700 text-center leading-8">
-        Would you like to ask a question ?
+        Would you like to ask a question?
       </p>
       <textarea
         onChange={(e) => setComment(e.target.value)}

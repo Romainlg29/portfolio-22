@@ -1,5 +1,15 @@
 [
   {
+    "id": 12,
+    "title": "Deploy containers automatically from Github with CI/CD",
+    "date": "April 1st, 2022",
+    "url": "deploy-docker-automatically-from-github",
+    "component": "DockerCICD.js",
+    "assets": "/Assets/Blog/Docker-Github-CI-CD",
+    "description": "Deploying a service can be quite a challenge. Moreover, if your app got a lot of iterations, you will need to deploy it multiple times. So, today, I'm going to show you how to automate this process with Docker and Github.",
+    "keywords": "docker, docker-compose, docker swarm, services, docker services, swarm, github, ci, cd, ci/cd, automation, script, easy, ssh, github actions, actions, workflow"
+  },
+  {
     "id": 11,
     "title": "Automatically scale all your docker services!",
     "date": "March 28th, 2022",
