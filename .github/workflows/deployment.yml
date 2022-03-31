@@ -50,3 +50,4 @@ jobs:
 
           # Finally, we're running the command
           script: /etc/docker/scripts/build.sh
+          
