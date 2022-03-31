@@ -227,10 +227,13 @@ const DockerCICD = ({ title, date, id, isPhone }) => {
             <br />
             <CodeParagraph># Clone the repository from Git</CodeParagraph>
             <CodeParagraph>
-              git clone https://github.com/you_user/your_repository.git
+              git clone -b your_branch https://github.com/you_user/your_repository.git
               /etc/docker/.../your_repo
             </CodeParagraph>
             <br />
+            <CodeParagraph># Move to the Dockerfile location if you use COPY</CodeParagraph>
+            <CodeParagraph>cd /etc/docker/.../your_repo/</CodeParagraph>
+            <br/>
             <CodeParagraph>
               # Build the image with a Dockerfile from your repository
             </CodeParagraph>

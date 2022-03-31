@@ -47,6 +47,11 @@ const Post = ({ post }) => {
                 ],
             }
         }
+        twitter={
+          {
+            cardType: "summary_large_image",
+          }
+        }
       />
       {post && (
         <Component
