@@ -41,7 +41,7 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
             alt=""
           />
           <Paragraph>
-            While upgrading my react app to the new React 18 rc, i was facing to
+            While upgrading my react app to the new React 18, i was facing to
             an error. Indeed, React Router V5 doesn't support React 18. However,
             that's not a big concern, but they removed few options that we use
             to move from page to page in React Three Fiber. So, today, we're
@@ -71,10 +71,9 @@ const MapWithGrafana = ({ title, date, id, isPhone }) => {
           </Paragraph>
 
           <Paragraph>
-            Then, install the latest version of React. For now, it's the React
-            Release Candidate 3. You have to use :{" "}
+            Then, install the latest version of React. You have to use :{" "}
             <ParagraphImp setText={setInfoText}>
-              npm install react@rc react-dom@rc
+              npm install react@latest react-dom@latest
             </ParagraphImp>
           </Paragraph>
 
