@@ -44,7 +44,7 @@ const CommentWrapper = ({ id }) => {
         className={
           "w-3/4 h-28 mt-4 p-2 border-none outline-none rounded-xl shadow resize-none overflow-y-scroll"
         }
-        placeholder={"Type your comment here!"}
+        placeholder={"Type your comment here! (It's anonymous.)"}
       />
       <div className="w-3/4 flex justify-end">
         <div
