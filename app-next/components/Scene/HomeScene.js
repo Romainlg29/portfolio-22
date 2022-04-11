@@ -36,7 +36,7 @@ const HomeScene = ({ isPhone }) => {
           <ScrollControls
             pages={isPhone ? 2.75 : 2.85}
             damping={4}
-            distance={2}
+            distance={isPhone ? 1 : 2}
           >
             <Camera isPhone={isPhone} />
             <Begin
