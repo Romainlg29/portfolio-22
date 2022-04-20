@@ -30,6 +30,7 @@ const HomeScene = ({ isPhone }) => {
           backgroundColor: theme ? "#F1F4F8" : "#0E0B07",
           width: "100%",
         }}
+        resize
       >
         <Suspense fallback={null}>
           <Preload all />

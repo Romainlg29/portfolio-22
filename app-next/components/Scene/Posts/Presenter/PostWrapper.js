@@ -20,6 +20,7 @@ const PostWrapper = ({ pages = 1, children, isPhone }) => {
           width: "100%",
           height: "100vh",
         }}
+        resize
       >
         <Preload all />
         <ScrollControls pages={pages} damping={4} distance={1}>
