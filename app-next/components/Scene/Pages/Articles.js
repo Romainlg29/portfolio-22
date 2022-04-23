@@ -72,7 +72,7 @@ const Four = ({ isPhone, theme, setCursor }) => {
           onClick={() => Router.push("/posts")}
         >
           <Text
-            scale={1}
+            scale={1.2}
             color={theme ? "black" : "white"}
             font={`https://fonts.gstatic.com/s/comfortaa/v12/1Ptsg8LJRfWJmhDAuUs4TYFs.woff`}
           >

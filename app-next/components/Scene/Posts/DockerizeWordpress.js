@@ -18,7 +18,7 @@ const DockerizeWordpress = ({ title, date, id, isPhone }) => {
   useEffect(() => {
     setOffsetHeight(document.documentElement.offsetHeight);
     setTimeout(() => {
-      setHeight(docRef.current.clientHeight + 340);
+      setHeight(docRef.current.clientHeight + 360);
     }, 1000);
   }, []);
 

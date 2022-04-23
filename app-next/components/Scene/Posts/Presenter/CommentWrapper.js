@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Comment from "./Comment";
 
 const CommentWrapper = ({ id }) => {
   const [comment, setComment] = useState("");
@@ -19,7 +20,10 @@ const CommentWrapper = ({ id }) => {
     });
     const res = await com.json();
     if (res.result) {
-      setComments([...comments, { comment: comment, period: new Date() }]);
+      setComments([
+        ...comments,
+        { id: id, comment: comment, period: new Date() },
+      ]);
       setComment("");
     }
   };
@@ -42,39 +46,36 @@ const CommentWrapper = ({ id }) => {
         value={comment}
         type={"text"}
         className={
-          "w-3/4 h-28 mt-4 p-2 border-none outline-none rounded-xl shadow resize-none overflow-y-scroll"
+          "w-full md:w-3/4 h-32 mt-4 p-2 border-none outline-none rounded-xl shadow resize-none overflow-y-scroll"
         }
         placeholder={"Type your comment here! (It's anonymous.)"}
       />
-      <div className="w-3/4 flex justify-end">
+      <div className="w-full md:w-3/4 flex justify-end">
         <div
           className="flex mt-2 py-1 px-2 items-center bg-white rounded-xl shadow cursor-pointer hover:shadow-md transition-all"
           onClick={send}
         >
           <p className="text-md mr-2">Send</p>
-          <img
-            className={"w-6 h-6"}
-            src={`/Assets/Icons/send.svg`}
-            alt=""
-          />
+          <img className={"w-6 h-6"} src={`/Assets/Icons/send.svg`} alt="" />
         </div>
       </div>
       <div className="w-full mt-24 flex flex-col items-center justify-center">
+        {comments && comments.length > 0 && (
+          <p className="text-xl text-gray-700 text-center leading-8">
+            Comments
+          </p>
+        )}
         {comments &&
-          comments.map((e) => {
+          comments.map((e, k) => {
             return (
-              <div className="w-3/4 mt-4 p-2 border-none outline-none rounded-xl shadow bg-white">
-                <p className="p-2">{e.comment}</p>
-                <div className="flex justify-end">
-                  <p className="text-sm">
-                    {Math.ceil(
-                      Math.abs(new Date() - new Date(e.period)) /
-                        (1000 * 60 * 60 * 24)
-                    )}
-                    d
-                  </p>
-                </div>
-              </div>
+              <Comment
+                key={`comment_${e.id}`}
+                comment_id={e.id}
+                id={k + 1}
+                comment={e.comment}
+                period={e.period}
+                responses={e.responses}
+              />
             );
           })}
       </div>

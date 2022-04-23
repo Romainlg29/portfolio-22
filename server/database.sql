@@ -33,3 +33,10 @@ CREATE TABLE posts_comments (
     period DATETIME NOT NULL,
     PRIMARY KEY (id)
 );
+CREATE TABLE posts_comments_responses (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    comment INT UNSIGNED REFERENCES posts_comments(id),
+    response TEXT,
+    period DATETIME NOT NULL,
+    PRIMARY KEY (id)
+);
