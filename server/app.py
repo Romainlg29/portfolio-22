@@ -32,12 +32,21 @@ def overall_analytics():
     conn, db = connectToDatabase(mariadb)
     req = request.get_json()
 
-    # Anonymise the user's ip
+    # Anonymise the user's ip (PROD)
     hash = hashlib.sha256(
         request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
 
+    # Anonymise the user's ip (DEV)
+    #hash = hashlib.sha256(request.environ['REMOTE_ADDR'].encode('utf8')).hexdigest()
+
     locations = IP2Location.IP2Location("./ips_blocks.bin")
+
+    # Get the user's location (PROD)
     location = locations.get_country_short(request.environ['HTTP_X_FORWARDED_FOR'])
+    
+    # Get the user's location (DEV)
+    #location = locations.get_country_short(request.environ['REMOTE_ADDR'])
+    
     locations.close()
 
     print(f'User comes from {req["from"]}')
@@ -112,9 +121,12 @@ def posts_analytics():
         conn.close()
         return ''
 
-    # Anonymise the user's ip
+    # Anonymise the user's ip (PROD)
     hash = hashlib.sha256(
         request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
+
+    # Anonymise the user's ip (DEV)
+    #hash = hashlib.sha256(request.environ['REMOTE_ADDR'].encode('utf8')).hexdigest()
 
     # Check if this hash already exists
     id = 0
@@ -165,18 +177,12 @@ def post_comment():
     req = request.get_json()
 
     # If no data from post, it'll return nothing
-    if req['post'] == None:
-        return Response(json.dumps({'result': False}), status=424, mimetype='application/json')
-
-    if req['comment'] == None:
+    if req['post'] == None or req['comment'] == None:
         return Response(json.dumps({'result': False}), status=424, mimetype='application/json')
 
     # Not needed with React as JSX handle
     #comment = html.escape(req['comment'])
     comment = req['comment']
-
-    #if profanity_check.predict_prob([comment]) > .8:
-    #    return Response(json.dumps({'result': False, 'reason': 'Sentences aren\'t correct!'}), status=200, mimetype='application/json')
 
     # Connect to DB and get post data
     conn, db = connectToDatabase(mariadb)
@@ -187,6 +193,7 @@ def post_comment():
 
         conn.commit()
         conn.close()
+
     except:
         return Response(json.dumps({'result': False}), status=424, mimetype='application/json')
 
@@ -210,10 +217,10 @@ def get_comments():
 
     try:
         db.execute(
-            "SELECT comment, period FROM posts_comments WHERE post = ? ORDER BY period;", (post,))
+            "SELECT id, comment, period FROM posts_comments WHERE post = ? ORDER BY period;", (post,))
 
         for e in db:
-            l.append({'comment': e[0], 'period': e[1]})
+            l.append({'id': e[0], 'comment': e[1], 'period': e[2], 'responses': get_comment_responses(e[0])})
 
         conn.commit()
         conn.close()
@@ -222,6 +229,63 @@ def get_comments():
         return ''
 
     return Response(json.dumps(l), status=200, mimetype='application/json')
+
+
+@app.route("/api/comment", methods=['POST'])
+def comment_response():
+    
+        req = request.get_json()
+    
+        # If no data from post, it'll return nothing
+        if req['response'] == None or req['comment'] == None:
+            return Response(json.dumps({'result': False}), status=424, mimetype='application/json')
+    
+        # Connect to DB and get post data
+        conn, db = connectToDatabase(mariadb)
+    
+        try:
+            db.execute(
+                "INSERT INTO posts_comments_responses(comment, response, period) VALUES(?, ?, ?)", (req['comment'], req['response'], datetime.now() + timedelta(hours=1)))
+    
+            conn.commit()
+            conn.close()
+    
+        except BaseException as ex:
+            print(ex)
+            return Response(json.dumps({'result': False}), status=424, mimetype='application/json')
+    
+        return Response(json.dumps({'result': True}), status=200, mimetype='application/json')
+
+
+@app.route("/api/comment", methods=['GET'])
+def get_comment_responses(i = None):
+
+    comment = request.args.get('comment', type=int) or i
+
+    # If no data from post, it'll return nothing
+    if comment == None:
+        return ''
+
+    # Connect to DB and get post data
+    conn, db = connectToDatabase(mariadb)
+
+    # Our list of comments
+    l = []
+
+    try:
+        db.execute(
+            "SELECT id, response, period FROM posts_comments_responses WHERE comment = ? ORDER BY period;", (comment,))
+
+        for e in db:
+            l.append({'id': e[0], 'response': e[1], 'period': e[2]})
+
+        conn.commit()
+        conn.close()
+
+    except BaseException:
+        return ''
+
+    return Response(json.dumps(l), status=200, mimetype='application/json') if i == None else l
 
 
 if __name__ == '__main__':
