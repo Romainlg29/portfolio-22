@@ -1,7 +1,7 @@
 # Imports
 from datetime import datetime, timedelta
 from flask import Flask, request, redirect, Response, json
-from flask_cors import CORS
+#from flask_cors import CORS
 import hashlib
 import mariadb
 from dotenv import load_dotenv
@@ -14,7 +14,7 @@ load_dotenv()
 
 # Flask
 app = Flask(__name__)
-CORS(app)  # DEV ONLY
+#CORS(app)  # DEV ONLY
 
 
 @app.route("/api/", methods=['POST', 'GET'])
@@ -33,19 +33,19 @@ def overall_analytics():
     req = request.get_json()
 
     # Anonymise the user's ip (PROD)
-    #hash = hashlib.sha256(
-    #    request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
+    hash = hashlib.sha256(
+        request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
 
     # Anonymise the user's ip (DEV)
-    hash = hashlib.sha256(request.environ['REMOTE_ADDR'].encode('utf8')).hexdigest()
+    #hash = hashlib.sha256(request.environ['REMOTE_ADDR'].encode('utf8')).hexdigest()
 
     locations = IP2Location.IP2Location("./ips_blocks.bin")
 
     # Get the user's location (PROD)
-    #location = locations.get_country_short(request.environ['HTTP_X_FORWARDED_FOR'])
+    location = locations.get_country_short(request.environ['HTTP_X_FORWARDED_FOR'])
     
     # Get the user's location (DEV)
-    location = locations.get_country_short(request.environ['REMOTE_ADDR'])
+    #location = locations.get_country_short(request.environ['REMOTE_ADDR'])
     
     locations.close()
 
@@ -122,11 +122,11 @@ def posts_analytics():
         return ''
 
     # Anonymise the user's ip (PROD)
-    #hash = hashlib.sha256(
-    #    request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
+    hash = hashlib.sha256(
+        request.environ['HTTP_X_FORWARDED_FOR'].encode('utf8')).hexdigest()
 
     # Anonymise the user's ip (DEV)
-    hash = hashlib.sha256(request.environ['REMOTE_ADDR'].encode('utf8')).hexdigest()
+    #hash = hashlib.sha256(request.environ['REMOTE_ADDR'].encode('utf8')).hexdigest()
 
     # Check if this hash already exists
     id = 0
