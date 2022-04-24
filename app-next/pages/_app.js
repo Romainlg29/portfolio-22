@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
     const uad = navigator.userAgentData;
 
     const sendAnalytics = async () => {
-      fetch("http://localhost:5000/api/analytics/overall", {
+      fetch("https://romain-legall.fr/api/analytics/overall", {
         method: "POST",
         headers: {
           Accept: "application/json",
